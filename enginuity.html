@@ -6,874 +6,1725 @@
 <title>Enginuity – Precision Prototyping & Manufacturing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════════════════════════════════════
-   DESIGN TOKENS
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   METALLIC DARK — CNC / Precision Manufacturing
+   Pure dark steel palette — NO sandy/amber borders
+═══════════════════════════════════════════════════ */
 :root {
-  --black:   #080909;
-  --steel:   #111315;
-  --mid:     #1a1d20;
-  --panel:   #1e2226;
-  --border:  #272c32;
-  --muted:   #40484f;
-  --silver:  #7a8898;
-  --light:   #bec8d4;
-  --white:   #edf1f5;
-  --accent:  #e8a020;
-  --accent2: #2e8fc0;
+  --bg:      #06080a;
+  --s1:      #0b0e11;
+  --s2:      #101418;
+  --s3:      #161b20;
+  --panel:   #1b2128;
+  /* borders — pure cool steel, no warmth */
+  --b0:      #181e24;
+  --b1:      #1f2830;
+  --b2:      #28343e;
+  --b3:      #364450;
+  /* text */
+  --t-dim:   #28353f;
+  --t-mid:   #4e6070;
+  --t-light: #7a96a8;
+  --t-body:  #a8bfcc;
+  --t-head:  #dce8f0;
+  --white:   #eef4f8;
+  /* amber — ONLY for accents, never for lines/borders */
+  --amber:   #e8900a;
+  --amber-h: #ffaa20;
+  /* chrome — used for text effects only */
+  --chrome-grad: linear-gradient(160deg,#b8d0e0 0%,#e8f2f8 25%,#8aaac0 45%,#d8eaf4 60%,#7898ae 80%,#b8d0e0 100%);
+  /* cool steel blue for eyebrows */
+  --steel:   #2e8fc0;
   --green:   #2ebc7a;
-  --fd: 'Bebas Neue', sans-serif;
-  --fb: 'DM Sans', sans-serif;
-  --fm: 'DM Mono', monospace;
+
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'DM Sans',sans-serif;
+  --fm:'DM Mono',monospace;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--black); color: var(--white); font-family: var(--fb); font-weight: 300; line-height: 1.65; overflow-x: hidden; }
-a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
-button { font-family: inherit; }
 
-/* ═══════════════════════════════════════════
-   SKIP / TOP BAR
-═══════════════════════════════════════════ */
-.skip-link { position: absolute; top: -100%; left: 1rem; z-index: 9999; background: var(--accent); color: var(--black); padding: .5rem 1rem; font-family: var(--fm); font-size: .75rem; transition: top .2s; }
-.skip-link:focus { top: 1rem; }
-.top-bar { background: var(--steel); border-bottom: 1px solid var(--border); display: flex; justify-content: flex-end; padding: .45rem 2.5rem; font-family: var(--fm); font-size: .68rem; color: var(--silver); letter-spacing: .08em; }
-.top-bar a { color: #25D366; display: flex; align-items: center; gap: .45rem; transition: opacity .2s; }
-.top-bar a:hover { opacity: .75; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t-body);font-family:var(--fb);font-weight:300;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer}
 
-/* ═══════════════════════════════════════════
-   HEADER / NAV
-═══════════════════════════════════════════ */
-header { position: sticky; top: 0; z-index: 200; background: rgba(8,9,9,.96); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: .85rem 2.5rem; }
-.logo-img { height: 36px; width: auto; object-fit: contain; }
-nav { display: flex; align-items: center; gap: 2.5rem; }
-nav a { font-family: var(--fm); font-size: .69rem; letter-spacing: .16em; text-transform: uppercase; color: var(--silver); transition: color .2s; position: relative; }
-nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width .25s; }
-nav a:hover, nav a.active { color: var(--white); }
-nav a:hover::after, nav a.active::after { width: 100%; }
-.search-btn { background: none; border: 1px solid var(--border); color: var(--silver); padding: .35rem .7rem; cursor: pointer; font-size: .8rem; transition: all .2s; line-height: 1; }
-.search-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* skip */
+.skip-link{position:absolute;top:-100%;left:1rem;z-index:9999;background:var(--amber);color:#000;padding:.5rem 1rem;font-family:var(--fm);font-size:.75rem;transition:top .2s}
+.skip-link:focus{top:1rem}
 
-/* ═══════════════════════════════════════════
-   PAGES
-═══════════════════════════════════════════ */
-.page { display: none; }
-.page.active { display: block; }
+/* top bar */
+.top-bar{background:var(--s1);display:flex;justify-content:flex-end;padding:.4rem 2.5rem;font-family:var(--fm);font-size:.67rem;color:var(--t-mid);letter-spacing:.08em;border-bottom:1px solid var(--b1)}
+.top-bar a{color:#25D366;display:flex;align-items:center;gap:.4rem;transition:opacity .2s}
+.top-bar a:hover{opacity:.75}
 
-/* ═══════════════════════════════════════════
-   BUTTONS
-═══════════════════════════════════════════ */
-.btn-primary { background: var(--accent); color: var(--black); padding: .9rem 2.4rem; font-family: var(--fm); font-size: .71rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; cursor: pointer; border: none; transition: all .25s; display: inline-block; clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); }
-.btn-primary:hover { background: var(--white); transform: translateY(-2px); }
-.btn-ghost { background: transparent; color: var(--white); padding: .9rem 2.4rem; font-family: var(--fm); font-size: .71rem; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; border: 1px solid rgba(255,255,255,.22); transition: all .25s; display: inline-block; }
-.btn-ghost:hover { border-color: var(--white); transform: translateY(-2px); }
-.btn-green { background: var(--green); color: var(--black); padding: .9rem 2.4rem; font-family: var(--fm); font-size: .71rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; cursor: pointer; border: none; transition: all .25s; display: inline-block; clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); }
-.btn-green:hover { background: var(--white); transform: translateY(-2px); }
-
-/* ═══════════════════════════════════════════
-   COMMON SECTION PARTS
-═══════════════════════════════════════════ */
-section { padding: 6rem 2.5rem; position: relative; }
-.container { max-width: 1200px; margin: 0 auto; }
-.section-label { font-family: var(--fm); font-size: .61rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: .8rem; margin-bottom: 1.2rem; }
-.section-label::before { content: ''; display: block; width: 26px; height: 1px; background: var(--accent); }
-.section-title { font-family: var(--fd); font-size: clamp(2.8rem,5.5vw,4.8rem); letter-spacing: .04em; line-height: 1; color: var(--white); margin-bottom: 1.5rem; }
-.body-text { font-size: 1rem; color: var(--light); line-height: 1.85; }
-
-/* reveal animation */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s, transform .75s; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ═══════════════════════════════════════════
-   ██  HOME PAGE
-═══════════════════════════════════════════ */
-
-/* — HERO — */
-#hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; }
-.hero-img { position: absolute; inset: 0; z-index: 0; }
-.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
-.hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg,rgba(8,9,9,.93) 0%,rgba(8,9,9,.72) 55%,rgba(8,9,9,.28) 100%); }
-.hero-grid { position: absolute; inset: 0; z-index: 1; background: repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(255,255,255,.016) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.016) 60px); pointer-events: none; }
-.hero-content { position: relative; z-index: 2; max-width: 860px; padding: 9rem 2.5rem 7rem 5vw; }
-.hero-pre { font-family: var(--fm); font-size: .67rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp .8s .3s forwards; display: flex; align-items: center; gap: .8rem; }
-.hero-pre::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent); flex-shrink: 0; }
-.hero-h1 { font-family: var(--fd); font-size: clamp(4.5rem,11vw,9.5rem); line-height: .93; letter-spacing: .02em; color: var(--white); opacity: 0; animation: fadeUp .9s .5s forwards; }
-.hero-h1 .line2 { color: transparent; -webkit-text-stroke: 1.5px var(--accent); }
-.hero-sub { margin-top: 2rem; font-size: clamp(.9rem,1.5vw,1.05rem); color: var(--light); max-width: 500px; font-weight: 300; line-height: 1.8; opacity: 0; animation: fadeUp .9s .7s forwards; }
-.hero-cta { margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp .9s .9s forwards; }
-.hero-badge { position: absolute; bottom: 3.5rem; right: 3rem; z-index: 2; border: 1px solid var(--border); background: rgba(8,9,9,.78); padding: 1.2rem 1.6rem; text-align: right; opacity: 0; animation: fadeIn 1s 1.4s forwards; backdrop-filter: blur(8px); }
-.hero-badge-num { font-family: var(--fd); font-size: 2.8rem; color: var(--accent); line-height: 1; }
-.hero-badge-lbl { font-family: var(--fm); font-size: .57rem; color: var(--silver); letter-spacing: .18em; text-transform: uppercase; margin-top: .3rem; }
-.scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--fm); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: .6rem; animation: fadeIn 1s 1.7s forwards; opacity: 0; }
-.scroll-arrow { width: 1px; height: 40px; background: linear-gradient(to bottom,var(--accent),transparent); animation: scrollPulse 1.8s infinite; }
-
-/* — WHAT WE DO — */
-#what-we-do { background: var(--steel); border-top: 1px solid var(--border); }
-.video-wrap { position: relative; padding-top: 56.25%; background: var(--mid); border: 1px solid var(--border); overflow: hidden; margin-top: 2.5rem; }
-.video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-.video-caption { font-family: var(--fm); font-size: .65rem; color: var(--muted); letter-spacing: .1em; margin-top: .8rem; }
-.video-caption a { color: var(--accent); }
-
-/* — SERVICE BLOCK — */
-#service { background: var(--black); border-top: 1px solid var(--border); }
-.service-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-.service-desc { font-size: 1.04rem; color: var(--light); line-height: 1.82; margin-bottom: 2rem; }
-.tags { display: flex; flex-wrap: wrap; gap: .55rem; margin-bottom: 2.5rem; }
-.tag { font-family: var(--fm); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: .4rem .9rem; border: 1px solid var(--border); color: var(--silver); transition: all .2s; }
-.tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(232,160,32,.05); }
-.service-img { position: relative; aspect-ratio: 1; border: 1px solid var(--border); overflow: hidden; }
-.service-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
-.service-img:hover img { transform: scale(1.04); }
-.service-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(232,160,32,.1),transparent 60%); pointer-events: none; }
-
-/* — FROM INDIA — */
-#india { background: var(--steel); border-top: 1px solid var(--border); }
-.india-text { max-width: 680px; margin-bottom: 3rem; }
-.india-text p { color: var(--light); margin-bottom: 1rem; line-height: 1.85; font-size: 1rem; }
-.cap-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-.cap-card { cursor: pointer; transition: transform .35s,border-color .35s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; min-height: 320px; border: 1px solid var(--border); }
-.cap-card-img { position: absolute; inset: 0; }
-.cap-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s; }
-.cap-card:hover .cap-card-img img { transform: scale(1.06); }
-.cap-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top,rgba(8,9,9,.93) 0%,rgba(8,9,9,.5) 50%,rgba(8,9,9,.08) 100%); }
-.cap-card-body { position: relative; z-index: 2; padding: 1.8rem; }
-.cap-card-title { font-family: var(--fd); font-size: 1.3rem; letter-spacing: .04em; color: var(--white); line-height: 1.2; margin-bottom: .6rem; }
-.cap-card-arrow { font-family: var(--fm); font-size: .64rem; color: var(--accent); letter-spacing: .1em; opacity: 0; transform: translateX(-6px); transition: all .3s; }
-.cap-card:hover .cap-card-arrow { opacity: 1; transform: translateX(0); }
-.cap-card:hover { transform: translateY(-5px); border-color: rgba(232,160,32,.28); }
-
-/* — CAROUSEL — */
-#carousel { background: var(--black); border-top: 1px solid var(--border); padding: 0; overflow: hidden; }
-.carousel-strip { display: flex; overflow-x: auto; scrollbar-width: none; cursor: grab; }
-.carousel-strip::-webkit-scrollbar { display: none; }
-.carousel-strip.grabbing { cursor: grabbing; }
-.carousel-item { flex: 0 0 33.33vw; height: 42vh; min-height: 260px; border-right: 1px solid var(--border); display: flex; align-items: flex-end; padding: 1.5rem; position: relative; overflow: hidden; transition: flex .5s ease; }
-.carousel-item:hover { flex: 0 0 46vw; }
-.carousel-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-.carousel-item:hover img { transform: scale(1.04); }
-.ci-ov { position: absolute; inset: 0; background: linear-gradient(to top,rgba(8,9,9,.82) 0%,rgba(8,9,9,.18) 70%); }
-.ci-label { font-family: var(--fm); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--light); position: relative; z-index: 1; }
-
-/* — HOW IT WORKS — */
-#how-it-works { background: var(--steel); border-top: 1px solid var(--border); }
-.process-sub { font-family: var(--fm); font-size: .7rem; color: var(--accent2); letter-spacing: .25em; text-transform: uppercase; margin-bottom: 3rem; }
-.process-flow { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; margin-bottom: 3rem; }
-.p-step { display: flex; align-items: center; }
-.step-box { background: var(--mid); border: 1px solid var(--border); padding: 1.5rem 1.8rem; transition: all .25s; min-width: 130px; }
-.step-box:hover { border-color: var(--accent); background: rgba(232,160,32,.04); }
-.step-num { font-family: var(--fm); font-size: .57rem; color: var(--accent); letter-spacing: .2em; margin-bottom: .4rem; }
-.step-name { font-family: var(--fd); font-size: .95rem; letter-spacing: .06em; color: var(--white); }
-.step-arr { font-family: var(--fm); color: var(--muted); padding: 0 .6rem; font-size: 1rem; flex-shrink: 0; }
-.iso-note { background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 1.4rem 2rem; font-family: var(--fm); font-size: .69rem; color: var(--light); letter-spacing: .05em; line-height: 1.75; }
-
-/* — WHAT WE PROVIDE — */
-#what-we-provide { background: var(--black); border-top: 1px solid var(--border); }
-.value-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2.5rem; }
-.value-cell { background: var(--steel); padding: 2.2rem 2rem; display: flex; align-items: flex-start; gap: 1rem; transition: background .25s; }
-.value-cell:hover { background: var(--mid); }
-.v-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; margin-top: .65rem; }
-.v-name { font-family: var(--fd); font-size: 1.35rem; letter-spacing: .05em; color: var(--white); }
-
-/* — WHO WE SERVE — */
-#who-we-serve { background: var(--steel); border-top: 1px solid var(--border); }
-.aud-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 2.5rem; }
-.aud-card { border: 1px solid var(--border); overflow: hidden; position: relative; transition: transform .35s,border-color .35s; min-height: 270px; display: flex; flex-direction: column; justify-content: flex-end; }
-.aud-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-.aud-card:hover img { transform: scale(1.05); }
-.aud-ov { position: absolute; inset: 0; background: linear-gradient(to top,rgba(8,9,9,.9) 0%,rgba(8,9,9,.28) 65%); }
-.aud-body { position: relative; z-index: 2; padding: 1.5rem; }
-.aud-tag { font-family: var(--fm); font-size: .57rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
-.aud-name { font-family: var(--fd); font-size: 1.5rem; letter-spacing: .05em; color: var(--white); }
-.aud-card:hover { transform: translateY(-5px); border-color: rgba(232,160,32,.28); }
-
-/* — RECENT PROJECT — */
-#recent-project { background: var(--black); border-top: 1px solid var(--border); }
-
-/* — PROJECT CTA — */
-#project-cta { background: var(--steel); border-top: 1px solid var(--border); text-align: center; padding: 7rem 2.5rem; position: relative; overflow: hidden; }
-#project-cta::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(255,255,255,.013) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.013) 60px); }
-.cta-q { position: relative; z-index: 1; font-family: var(--fd); font-size: clamp(5rem,13vw,11rem); letter-spacing: .04em; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.1); margin-bottom: .5rem; animation: glitch 10s infinite; }
-.cta-ey { position: relative; z-index: 1; font-family: var(--fd); font-size: clamp(1.5rem,3vw,2.8rem); letter-spacing: .08em; color: var(--white); margin-bottom: .8rem; }
-.cta-sub { position: relative; z-index: 1; font-family: var(--fm); font-size: .7rem; color: var(--silver); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 3rem; }
-
-/* — IP — */
-#ip-assurance { background: var(--black); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.8rem; text-align: center; }
-.ip-text { font-family: var(--fm); font-size: .72rem; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 1.2rem; }
-.ip-text svg { width: 15px; height: 15px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-
-/* ═══════════════════════════════════════════
-   ██  CAPABILITIES PAGE
-═══════════════════════════════════════════ */
-#cap-hero { min-height: 52vh; position: relative; display: flex; align-items: flex-end; padding: 0; overflow: hidden; }
-#cap-hero .cap-hero-img { position: absolute; inset: 0; z-index: 0; }
-#cap-hero .cap-hero-img img { width: 100%; height: 100%; object-fit: cover; }
-#cap-hero .cap-hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top,rgba(8,9,9,1) 0%,rgba(8,9,9,.6) 60%,rgba(8,9,9,.2) 100%); }
-.cap-hero-content { position: relative; z-index: 2; padding: 4rem 5vw 4rem; max-width: 1200px; margin: 0 auto; width: 100%; }
-.cap-hero-title { font-family: var(--fd); font-size: clamp(3.5rem,8vw,7rem); letter-spacing: .04em; line-height: 1; margin-bottom: .8rem; opacity: 0; animation: fadeUp .9s .3s forwards; }
-.cap-hero-sub { font-family: var(--fm); font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); opacity: 0; animation: fadeUp .8s .5s forwards; }
-
-#cap-services { background: var(--black); border-top: 1px solid var(--border); }
-.cap-group-title { font-family: var(--fm); font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--accent2); display: flex; align-items: center; gap: .8rem; margin-bottom: 2.5rem; }
-.cap-group-title::before { content: ''; display: block; width: 26px; height: 1px; background: var(--accent2); }
-
-.service-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 4rem; }
-.svc-card { background: var(--steel); border: 1px solid var(--border); overflow: hidden; transition: transform .3s,border-color .3s; }
-.svc-card:hover { transform: translateY(-4px); border-color: rgba(232,160,32,.3); }
-.svc-img { position: relative; aspect-ratio: 16/9; overflow: hidden; }
-.svc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-.svc-card:hover .svc-img img { transform: scale(1.05); }
-.svc-body { padding: 1.8rem; }
-.svc-title { font-family: var(--fd); font-size: 1.5rem; letter-spacing: .05em; margin-bottom: 1rem; color: var(--white); }
-.svc-row { display: flex; gap: .5rem; margin-bottom: .6rem; flex-wrap: wrap; align-items: flex-start; }
-.svc-key { font-family: var(--fm); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); min-width: 90px; flex-shrink: 0; padding-top: .05rem; }
-.svc-val { font-size: .85rem; color: var(--light); line-height: 1.6; }
-.svc-moq { display: inline-block; margin-top: .8rem; background: rgba(232,160,32,.1); border: 1px solid rgba(232,160,32,.25); font-family: var(--fm); font-size: .6rem; letter-spacing: .12em; color: var(--accent); padding: .3rem .8rem; text-transform: uppercase; }
-
-/* full-width service block (Prototyping / Production) */
-.svc-full { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); margin-bottom: 1.5rem; overflow: hidden; transition: border-color .3s; }
-.svc-full:hover { border-color: rgba(232,160,32,.3); }
-.svc-full-img { position: relative; min-height: 280px; overflow: hidden; }
-.svc-full-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-.svc-full:hover .svc-full-img img { transform: scale(1.04); }
-.svc-full-body { background: var(--steel); padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
-.svc-full-title { font-family: var(--fd); font-size: 2rem; letter-spacing: .06em; margin-bottom: 1rem; color: var(--white); }
-.svc-full-desc { font-size: .95rem; color: var(--light); line-height: 1.8; }
-
-#cap-cta { background: var(--steel); border-top: 1px solid var(--border); text-align: center; padding: 5rem 2.5rem; }
-
-/* ═══════════════════════════════════════════
-   ██  SUSTAINABILITY PAGE
-═══════════════════════════════════════════ */
-#sust-hero { min-height: 60vh; position: relative; display: flex; align-items: center; overflow: hidden; }
-.sust-hero-img { position: absolute; inset: 0; z-index: 0; }
-.sust-hero-img img { width: 100%; height: 100%; object-fit: cover; }
-.sust-hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg,rgba(8,9,9,.92) 0%,rgba(8,9,9,.6) 55%,rgba(8,9,9,.2) 100%); }
-.sust-hero-content { position: relative; z-index: 2; padding: 6rem 5vw; max-width: 1200px; width: 100%; }
-.sust-hero-label { font-family: var(--fm); font-size: .67rem; letter-spacing: .3em; text-transform: uppercase; color: var(--green); margin-bottom: 1.2rem; display: flex; align-items: center; gap: .8rem; opacity: 0; animation: fadeUp .8s .3s forwards; }
-.sust-hero-label::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--green); flex-shrink: 0; }
-.sust-hero-h1 { font-family: var(--fd); font-size: clamp(4rem,10vw,8rem); line-height: .93; letter-spacing: .02em; opacity: 0; animation: fadeUp .9s .5s forwards; }
-.sust-hero-h1 span { color: var(--green); }
-.sust-hero-sub { margin-top: 1.5rem; font-size: 1rem; color: var(--light); max-width: 520px; font-weight: 300; line-height: 1.8; opacity: 0; animation: fadeUp .9s .7s forwards; }
-
-#sust-war { background: var(--steel); border-top: 1px solid var(--border); }
-.sust-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.sust-img-box { position: relative; aspect-ratio: 4/3; border: 1px solid var(--border); overflow: hidden; }
-.sust-img-box img { width: 100%; height: 100%; object-fit: cover; }
-.sust-img-box::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(46,188,122,.08),transparent 60%); }
-.sust-eyebrow { font-family: var(--fm); font-size: .62rem; letter-spacing: .28em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; display: flex; align-items: center; gap: .7rem; }
-.sust-eyebrow::before { content: ''; display: block; width: 22px; height: 1px; background: var(--green); }
-.sust-h2 { font-family: var(--fd); font-size: clamp(2.2rem,4.5vw,3.8rem); letter-spacing: .04em; line-height: 1.05; margin-bottom: 1.5rem; color: var(--white); }
-.sust-h2 em { font-style: normal; color: var(--green); }
-
-#sust-pillars { background: var(--black); border-top: 1px solid var(--border); }
-.pillar-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; margin-top: 2.5rem; }
-.pillar-card { background: var(--steel); border: 1px solid var(--border); padding: 2.5rem; transition: border-color .3s,background .3s; position: relative; overflow: hidden; }
-.pillar-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--green); }
-.pillar-card:hover { border-color: rgba(46,188,122,.35); background: var(--mid); }
-.pillar-icon { font-family: var(--fd); font-size: 3.5rem; color: rgba(46,188,122,.15); position: absolute; top: 1.5rem; right: 1.5rem; line-height: 1; }
-.pillar-title { font-family: var(--fd); font-size: 1.5rem; letter-spacing: .06em; color: var(--white); margin-bottom: .8rem; }
-.pillar-text { font-size: .9rem; color: var(--light); line-height: 1.75; }
-
-#sust-network { background: var(--steel); border-top: 1px solid var(--border); }
-.network-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
-.n-tag { font-family: var(--fm); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: .5rem 1rem; border: 1px solid rgba(46,188,122,.3); color: var(--green); transition: all .2s; }
-.n-tag:hover { background: rgba(46,188,122,.08); }
-
-/* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
-footer { background: var(--steel); border-top: 1px solid var(--border); padding: 5rem 2.5rem 2.5rem; }
-.footer-grid { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
-.foot-logo { height: 30px; width: auto; object-fit: contain; margin-bottom: 1.2rem; }
-.foot-tag { font-size: .83rem; color: var(--muted); line-height: 1.78; max-width: 260px; }
-.foot-col h4 { font-family: var(--fm); font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
-.foot-col ul { list-style: none; }
-.foot-col ul li { margin-bottom: .65rem; }
-.foot-col ul li a, .foot-col ul li span { font-size: .83rem; color: var(--silver); transition: color .2s; }
-.foot-col ul li a:hover { color: var(--white); }
-.socials { display: flex; gap: .7rem; margin-top: 1.8rem; }
-.soc { width: 36px; height: 36px; border: 1px solid var(--border); display: grid; place-items: center; color: var(--silver); font-family: var(--fm); font-size: .57rem; letter-spacing: .04em; transition: all .2s; cursor: pointer; }
-.soc:hover { border-color: var(--accent); color: var(--accent); }
-.foot-bottom { max-width: 1200px; margin: 2.5rem auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-family: var(--fm); font-size: .62rem; color: var(--muted); letter-spacing: .08em; }
-
-/* ═══════════════════════════════════════════
-   KEYFRAMES
-═══════════════════════════════════════════ */
-@keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes scrollPulse { 0%,100%{transform:scaleY(1);opacity:1;} 50%{transform:scaleY(.55);opacity:.35;} }
-@keyframes glitch { 0%,94%,100%{text-shadow:none;} 95%{text-shadow:-4px 0 var(--accent);} 97%{text-shadow:4px 0 var(--accent2);} 99%{text-shadow:-3px 0 #d94f2a;} }
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-@media (max-width:1024px) { .footer-grid{grid-template-columns:1fr 1fr;} .service-cards{grid-template-columns:1fr 1fr;} }
-@media (max-width:900px) {
-  .service-inner{grid-template-columns:1fr;gap:3rem;} .service-img{display:none;}
-  .cap-cards{grid-template-columns:1fr;} .aud-grid{grid-template-columns:1fr 1fr;}
-  .value-grid{grid-template-columns:1fr 1fr;} .footer-grid{grid-template-columns:1fr 1fr;}
-  .hero-content{padding:8rem 2rem 6rem;} .hero-badge{display:none;}
-  .process-flow{flex-direction:column;align-items:flex-start;} .step-arr{transform:rotate(90deg);}
-  .sust-2col{grid-template-columns:1fr;} .svc-full{grid-template-columns:1fr;}
-  .pillar-grid{grid-template-columns:1fr;} .service-cards{grid-template-columns:1fr;}
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:500;
+  background:rgba(6,8,10,.95);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:60px;
+  box-shadow:0 1px 0 rgba(140,170,190,.06), 0 4px 32px rgba(0,0,0,.7);
 }
-@media (max-width:600px) {
-  .aud-grid{grid-template-columns:1fr;} .value-grid{grid-template-columns:1fr;}
-  .footer-grid{grid-template-columns:1fr;} .carousel-item{flex:0 0 80vw;}
-  .hero-h1{font-size:clamp(3.5rem,17vw,5.5rem);} nav a:nth-child(n+3){display:none;}
+/* brushed steel texture on header */
+header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0px,transparent 1px,rgba(255,255,255,.013) 1px,rgba(255,255,255,.013) 2px);pointer-events:none}
+
+.logo-wrap{display:flex;align-items:center;gap:.75rem;position:relative;z-index:1}
+.logo-img{height:33px;width:auto;filter:brightness(1.2) drop-shadow(0 0 8px rgba(232,144,10,.15))}
+.logo-name{font-family:var(--fd);font-size:1.5rem;letter-spacing:.14em;color:var(--t-head)}
+
+nav{display:flex;align-items:center;gap:0;position:relative;z-index:1}
+nav a,nav button{font-family:var(--fm);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--t-mid);padding:0 1.1rem;height:60px;display:flex;align-items:center;border:none;background:none;transition:color .2s;white-space:nowrap}
+nav a:hover,nav button:hover{color:var(--t-head)}
+nav a.active{color:var(--amber);position:relative}
+nav a.active::after{content:'';position:absolute;bottom:0;left:1.1rem;right:1.1rem;height:2px;background:var(--amber)}
+.nav-cta{background:var(--amber)!important;color:#000!important;padding:.45rem 1.3rem!important;height:auto!important;margin-left:.6rem;font-weight:500!important;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:background .2s!important}
+.nav-cta:hover{background:var(--amber-h)!important}
+
+/* pages */
+.page{display:none}.page.active{display:block}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--fm);font-size:.69rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;padding:.8rem 1.8rem;border:none;cursor:pointer;transition:all .22s;text-decoration:none}
+.btn-dark{background:var(--s3);color:var(--t-head);border:1px solid var(--b2);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.btn-dark:hover{background:var(--panel);border-color:var(--b3);transform:translateY(-1px)}
+.btn-amber{background:var(--amber);color:#000;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-amber:hover{background:var(--amber-h);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--t-light);border:1px solid var(--b2)}
+.btn-outline:hover{border-color:var(--amber);color:var(--amber)}
+.btn-arrow::after{content:' →'}
+
+/* commons */
+.container{max-width:1080px;margin:0 auto;padding:0 2.5rem}
+.sec-eyebrow{font-family:var(--fm);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem}
+.sec-h2{font-family:var(--fd);font-size:clamp(2rem,4vw,3.4rem);letter-spacing:.04em;line-height:1;color:var(--t-head);margin-bottom:1rem}
+.body-lg{font-size:1rem;color:var(--t-body);line-height:1.82}
+.body-sm{font-size:.87rem;color:var(--t-mid);line-height:1.7}
+
+/* ═══════════════════════════════════════════════════
+   SCROLL ANIMATION SYSTEM
+   Spring easing — elements fly in and SNAP into place
+═══════════════════════════════════════════════════ */
+.sa{opacity:0;transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1),filter .85s cubic-bezier(.22,1,.36,1)}
+.sa-up   {transform:translateY(55px)}
+.sa-left {transform:translateX(-65px)}
+.sa-right{transform:translateX(65px)}
+.sa-scale{transform:scale(.93)}
+.sa-blur {transform:translateY(28px);filter:blur(8px)}
+.sa.in   {opacity:1;transform:none;filter:none}
+.sd1{transition-delay:.07s}.sd2{transition-delay:.15s}.sd3{transition-delay:.24s}
+.sd4{transition-delay:.33s}.sd5{transition-delay:.42s}.sd6{transition-delay:.51s}
+
+/* ═══════════════════════════════════════════════════
+   HERO — Full-viewport image + parallax
+═══════════════════════════════════════════════════ */
+#hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:flex-end;overflow:hidden}
+
+.hero-bg{position:absolute;inset:0;z-index:0;will-change:transform}
+.hero-bg img{width:100%;height:112%;object-fit:cover;object-position:center 30%;display:block;filter:saturate(.72) brightness(.6)}
+
+/* layered overlay — dark bottom for text, subtle cool top */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to top,rgba(6,8,10,1) 0%,rgba(6,8,10,.75) 32%,rgba(6,8,10,.15) 68%,rgba(6,8,10,.05) 100%),
+    linear-gradient(to right,rgba(6,8,10,.55) 0%,rgba(6,8,10,.1) 55%,transparent 100%),
+    radial-gradient(ellipse 55% 45% at 75% 90%,rgba(46,143,192,.06) 0%,transparent 70%)
+}
+/* engineering grid overlay */
+.hero-grid{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(140,170,190,.035) 80px),
+             repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(140,170,190,.035) 80px)}
+/* brushed horizontal lines */
+.hero-brush{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(180deg,transparent 0px,transparent 1px,rgba(255,255,255,.01) 1px,rgba(255,255,255,.01) 2px)}
+
+.hero-content{position:relative;z-index:3;width:100%;max-width:1080px;margin:0 auto;padding:0 2.5rem 5rem}
+
+.hero-pre{font-family:var(--fm);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:1.8rem;display:flex;align-items:center;gap:.9rem;opacity:0;animation:heroUp .9s .25s cubic-bezier(.22,1,.36,1) forwards}
+.hero-pre::before{content:'';display:inline-block;width:32px;height:1px;background:var(--amber)}
+
+.hero-h1{font-family:var(--fd);font-size:clamp(4.5rem,11vw,10rem);line-height:.9;letter-spacing:.015em;margin-bottom:2rem;opacity:0;animation:heroUp .95s .4s cubic-bezier(.22,1,.36,1) forwards}
+.hero-h1 .line1{color:var(--t-head);display:block}
+/* chrome metallic second line */
+.hero-h1 .line2{
+  background:var(--chrome-grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;filter:drop-shadow(0 0 24px rgba(140,170,190,.18))
+}
+
+.hero-body{font-size:1.05rem;color:var(--t-body);line-height:1.8;max-width:560px;margin-bottom:2.8rem;opacity:0;animation:heroUp .9s .55s cubic-bezier(.22,1,.36,1) forwards}
+.hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:heroUp .9s .7s cubic-bezier(.22,1,.36,1) forwards}
+
+/* stats bar — cool dark steel, no sandy tones */
+.hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:3;background:rgba(6,8,10,.82);backdrop-filter:blur(12px);border-top:1px solid var(--b1)}
+.hero-stats-inner{max-width:1080px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:repeat(4,1fr);opacity:0;animation:heroUp .9s .85s cubic-bezier(.22,1,.36,1) forwards}
+.h-stat{padding:1.1rem 1.5rem;border-right:1px solid var(--b1);display:flex;flex-direction:column;gap:.2rem}
+.h-stat:last-child{border-right:none}
+.h-stat-num{font-family:var(--fd);font-size:1.8rem;line-height:1;background:linear-gradient(135deg,var(--amber) 0%,var(--amber-h) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h-stat-lbl{font-family:var(--fm);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t-mid)}
+
+/* ── PROBLEMS GRID ── */
+#problems{padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--s1);position:relative;overflow:hidden}
+#problems::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(140,170,190,.018) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(140,170,190,.018) 40px);pointer-events:none}
+.prob-header{max-width:1080px;margin:0 auto 3rem;position:relative;z-index:1}
+.prob-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--b2);box-shadow:0 8px 48px rgba(0,0,0,.6);position:relative;z-index:1}
+.prob-card{padding:1.8rem 1.6rem 2.2rem;border-right:1px solid var(--b1);background:var(--s2);position:relative;overflow:hidden;transition:background .3s}
+/* amber sweep on hover — accent only, not a divider */
+.prob-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--amber-h),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.prob-card:hover::before{transform:scaleX(1)}
+.prob-card:last-child{border-right:none}
+.prob-card:hover{background:var(--s3)}
+.prob-illus{width:100%;aspect-ratio:447/300;background:var(--panel);margin-bottom:1.4rem;overflow:hidden;position:relative;border:1px solid var(--b1)}
+.prob-illus img{width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:saturate(.65)}
+.prob-card:hover .prob-illus img{transform:scale(1.06);filter:saturate(.85)}
+.prob-title{font-family:var(--fb);font-size:.95rem;font-weight:600;color:var(--t-head);line-height:1.35;margin-bottom:.5rem}
+.prob-text{font-size:.82rem;color:var(--t-mid);line-height:1.7}
+
+/* ── WHAT WE DO + VIDEO ── */
+#what-we-do{padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--bg);position:relative}
+#what-we-do::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0px,transparent 1px,rgba(255,255,255,.011) 1px,rgba(255,255,255,.011) 2px);pointer-events:none}
+.wwd-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.video-wrap{position:relative;padding-top:56.25%;background:var(--panel);border:1px solid var(--b2);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-cap{font-family:var(--fm);font-size:.6rem;color:var(--t-dim);letter-spacing:.1em;margin-top:.7rem}
+.video-cap a{color:var(--amber)}
+.cap-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0 2rem}
+.cap-tag{font-family:var(--fm);font-size:.59rem;letter-spacing:.1em;text-transform:uppercase;padding:.33rem .82rem;border:1px solid var(--b2);color:var(--t-mid);background:var(--s2);transition:all .18s}
+.cap-tag:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ── FROM INDIA ── */
+#india{padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--s1);position:relative}
+#india::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(140,170,190,.016) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(140,170,190,.016) 40px);pointer-events:none}
+.india-header{max-width:1080px;margin:0 auto 3rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;position:relative;z-index:1}
+.india-cards{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);position:relative;z-index:1}
+.india-card{background:var(--s2);overflow:hidden;cursor:pointer;transition:all .35s cubic-bezier(.22,1,.36,1);position:relative}
+.india-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--amber-h),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.india-card:hover::after{transform:scaleX(1)}
+.india-card:hover{background:var(--s3)}
+.india-card-img{position:relative;aspect-ratio:4/3;overflow:hidden}
+.india-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:saturate(.6)}
+.india-card:hover .india-card-img img{transform:scale(1.07);filter:saturate(.82)}
+.india-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,10,.72) 0%,transparent 55%)}
+.india-card-body{padding:1.3rem 1.5rem 1.7rem;border-top:1px solid var(--b1)}
+.india-card-label{font-family:var(--fm);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:.4rem}
+.india-card-title{font-family:var(--fd);font-size:1.2rem;letter-spacing:.04em;color:var(--t-head);line-height:1.15}
+.india-card-link{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);display:inline-flex;align-items:center;gap:.3rem;margin-top:.7rem;transition:gap .2s}
+.india-card:hover .india-card-link{gap:.55rem}
+
+/* ── HOW IT WORKS ── */
+#how-it-works{padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--bg);position:relative}
+#how-it-works::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(140,170,190,.018) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(140,170,190,.018) 40px);pointer-events:none}
+.how-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.how-sub{font-family:var(--fm);font-size:.68rem;color:var(--steel);letter-spacing:.22em;text-transform:uppercase;margin-bottom:3rem}
+.how-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--b2);margin-bottom:2rem;box-shadow:0 4px 24px rgba(0,0,0,.4)}
+.how-step{padding:1.8rem 1.4rem;border-right:1px solid var(--b1);background:var(--s2);position:relative;overflow:hidden;transition:background .25s}
+.how-step::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.how-step:hover::before{transform:scaleX(1)}
+.how-step:last-child{border-right:none}
+.how-step:hover{background:var(--s3)}
+.how-step-num{font-family:var(--fm);font-size:.56rem;color:var(--amber);letter-spacing:.2em;margin-bottom:.6rem}
+.how-step-name{font-family:var(--fd);font-size:.98rem;letter-spacing:.05em;color:var(--t-head);line-height:1.2}
+.how-note{border-left:2px solid var(--b3);padding:1.1rem 1.5rem;background:var(--s2);border-top:1px solid var(--b1);border-right:1px solid var(--b1);border-bottom:1px solid var(--b1);font-family:var(--fm);font-size:.67rem;color:var(--t-body);letter-spacing:.04em;line-height:1.75}
+
+/* ── WHAT WE PROVIDE ── */
+#provides{padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--s1)}
+.prov-grid{max-width:1080px;margin:2.5rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border:1px solid var(--b1)}
+.prov-cell{background:var(--s2);padding:1.8rem;display:flex;align-items:flex-start;gap:.9rem;transition:background .25s;position:relative;overflow:hidden}
+.prov-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--amber);opacity:0;transition:opacity .3s}
+.prov-cell:hover::before{opacity:1}
+.prov-cell:hover{background:var(--s3)}
+.prov-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:.6rem;background:var(--amber);box-shadow:0 0 8px rgba(232,144,10,.45)}
+.prov-name{font-family:var(--fd);font-size:1.25rem;letter-spacing:.06em;color:var(--t-head)}
+
+/* ── WHO WE SERVE ── */
+#serves{padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--bg);position:relative}
+#serves::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0px,transparent 1px,rgba(255,255,255,.01) 1px,rgba(255,255,255,.01) 2px);pointer-events:none}
+.serve-grid{max-width:1080px;margin:2.5rem auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b1);position:relative;z-index:1}
+.serve-card{overflow:hidden;position:relative;min-height:240px;display:flex;flex-direction:column;justify-content:flex-end;transition:all .35s cubic-bezier(.22,1,.36,1)}
+.serve-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:saturate(.45) brightness(.6)}
+.serve-card:hover img{transform:scale(1.07);filter:saturate(.7) brightness(.75)}
+.serve-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,10,.95) 0%,rgba(6,8,10,.55) 50%,rgba(6,8,10,.1) 100%)}
+.serve-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:3}
+.serve-card:hover::before{transform:scaleX(1)}
+.serve-body{position:relative;z-index:2;padding:1.3rem 1.4rem}
+.serve-tag{font-family:var(--fm);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:.35rem}
+.serve-name{font-family:var(--fd);font-size:1.35rem;letter-spacing:.05em;color:#fff}
+
+/* ═══════════════════════════════════════════════════
+   IMAGE SHOWCASE — 3 full-width slides
+   Each one scrolls up and locks into place
+═══════════════════════════════════════════════════ */
+#showcase{background:var(--bg);border-bottom:1px solid var(--b1);overflow:hidden}
+
+.showcase-header{padding:4rem 2.5rem 2rem;max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end}
+
+/* each slide enters from below, snaps into place */
+.showcase-slide{
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--b1);
+  opacity:0;transform:translateY(90px);
+  transition:opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1)
+}
+.showcase-slide.in{opacity:1;transform:translateY(0)}
+.showcase-slide:nth-child(3){transition-delay:.12s}
+.showcase-slide:nth-child(4){transition-delay:.24s}
+.showcase-slide:last-child{border-bottom:none}
+
+.showcase-inner{display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+
+.showcase-img{position:relative;overflow:hidden}
+.showcase-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.6) brightness(.72);transition:filter .6s,transform .7s cubic-bezier(.22,1,.36,1)}
+.showcase-slide:hover .showcase-img img{filter:saturate(.82) brightness(.85);transform:scale(1.03)}
+/* cool metallic sheen on image — no amber */
+.showcase-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(140,170,190,.07) 0%,transparent 50%);pointer-events:none}
+
+.showcase-body{
+  background:var(--s2);
+  padding:3.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  border-left:1px solid var(--b1);
+  position:relative;overflow:hidden
+}
+/* brushed metal texture */
+.showcase-body::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0px,transparent 1px,rgba(255,255,255,.012) 1px,rgba(255,255,255,.012) 2px);pointer-events:none}
+/* large number watermark — cool steel, not amber */
+.showcase-body::after{content:attr(data-num);position:absolute;bottom:-1.5rem;right:.5rem;font-family:var(--fd);font-size:9rem;line-height:1;letter-spacing:.05em;color:rgba(140,170,190,.04);pointer-events:none}
+
+.slide-num{font-family:var(--fm);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--t-dim);margin-bottom:1.8rem;position:relative;z-index:1;display:flex;align-items:center;gap:.8rem}
+.slide-num::before{content:'';display:block;width:24px;height:1px;background:var(--b3)}
+.slide-tag{font-family:var(--fm);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:.8rem;position:relative;z-index:1}
+.slide-title{font-family:var(--fd);font-size:clamp(2rem,3.5vw,3rem);letter-spacing:.04em;line-height:1.05;color:var(--t-head);margin-bottom:1.2rem;position:relative;z-index:1}
+.slide-desc{font-size:.9rem;color:var(--t-mid);line-height:1.8;margin-bottom:2rem;position:relative;z-index:1}
+.slide-link{font-family:var(--fm);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);display:inline-flex;align-items:center;gap:.4rem;transition:gap .2s;position:relative;z-index:1}
+.slide-link:hover{gap:.7rem}
+
+/* alternate: even slides flip image/text sides */
+.showcase-slide:nth-child(even) .showcase-inner{direction:rtl}
+.showcase-slide:nth-child(even) .showcase-body{border-left:none;border-right:1px solid var(--b1);direction:ltr}
+.showcase-slide:nth-child(even) .showcase-img{direction:ltr}
+
+/* ── RECENT VIDEO ── */
+#recent{padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--s1);position:relative}
+#recent::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(140,170,190,.016) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(140,170,190,.016) 40px);pointer-events:none}
+.recent-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+
+/* ── JOIN CTA ── */
+#join{padding:7rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--bg);text-align:center;position:relative;overflow:hidden}
+#join::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(46,143,192,.05) 0%,transparent 70%),repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(140,170,190,.016) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(140,170,190,.016) 40px)}
+.join-q{position:relative;z-index:1;font-family:var(--fd);font-size:clamp(4.5rem,12vw,11rem);letter-spacing:.04em;color:transparent;-webkit-text-stroke:1.5px rgba(140,170,190,.07);margin-bottom:.5rem}
+.join-head{position:relative;z-index:1;font-family:var(--fd);font-size:clamp(1.8rem,3.5vw,3rem);letter-spacing:.06em;color:var(--t-head);margin-bottom:.8rem}
+.join-sub{position:relative;z-index:1;font-family:var(--fm);font-size:.68rem;color:var(--t-dim);letter-spacing:.18em;text-transform:uppercase;margin-bottom:3rem}
+.join-cta{position:relative;z-index:1}
+
+/* IP */
+#ip{background:var(--s1);border-bottom:1px solid var(--b1);padding:1.5rem;text-align:center}
+.ip-text{font-family:var(--fm);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--t-dim);display:flex;align-items:center;justify-content:center;gap:1rem}
+.ip-text svg{width:14px;height:14px;stroke:var(--amber);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ═══════════════════════════════════════════════════
+   CAPABILITIES PAGE
+═══════════════════════════════════════════════════ */
+#cap-hero{padding:5rem 2.5rem 4rem;border-bottom:1px solid var(--b1);background:var(--s1);position:relative;overflow:hidden}
+#cap-hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(6,8,10,.92) 0%,rgba(6,8,10,.75) 50%,rgba(6,8,10,.4) 100%),repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(140,170,190,.014) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(140,170,190,.014) 40px)}
+#cap-hero .cap-bg-img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.6);}
+.cap-hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:5rem;align-items:center;position:relative;z-index:2}
+.cap-hero-img{display:none}
+
+#cap-services{background:var(--bg)}
+.cap-section{padding:4rem 2.5rem;border-bottom:1px solid var(--b1)}
+.cap-section:nth-child(even){background:var(--s1)}
+.cap-section:nth-child(odd) {background:var(--bg)}
+.cap-section-inner{max-width:1080px;margin:0 auto}
+.grp-eyebrow{font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:.7rem;margin-bottom:2.5rem}
+.grp-eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--steel)}
+
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1)}
+.svc-card{background:var(--s2);overflow:hidden;transition:all .28s;position:relative}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--amber);opacity:0;transition:opacity .3s}
+.svc-card:hover{background:var(--s3)}.svc-card:hover::before{opacity:1}
+.svc-card-img{position:relative;aspect-ratio:16/9;overflow:hidden}
+.svc-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;filter:saturate(.65)}
+.svc-card:hover .svc-card-img img{transform:scale(1.05);filter:saturate(.85)}
+.svc-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,10,.55) 0%,transparent 60%)}
+.svc-card-body{padding:1.5rem;border-top:1px solid var(--b1)}
+.svc-card-title{font-family:var(--fd);font-size:1.4rem;letter-spacing:.05em;color:var(--t-head);margin-bottom:.9rem}
+.svc-row{display:flex;gap:.5rem;margin-bottom:.5rem;flex-wrap:wrap}
+.svc-key{font-family:var(--fm);font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);min-width:85px;flex-shrink:0;padding-top:.04rem}
+.svc-val{font-size:.82rem;color:var(--t-mid);line-height:1.6}
+.svc-moq{display:inline-block;margin-top:.7rem;background:rgba(232,144,10,.08);border:1px solid rgba(232,144,10,.2);font-family:var(--fm);font-size:.57rem;letter-spacing:.1em;color:var(--amber);padding:.26rem .72rem;text-transform:uppercase}
+
+.svc-full{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--b2);margin-bottom:1px;overflow:hidden;transition:border-color .3s;background:var(--b1)}
+.svc-full:hover{border-color:var(--b3)}
+.svc-full-img{position:relative;min-height:280px;overflow:hidden}
+.svc-full-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s;filter:saturate(.6)}
+.svc-full:hover .svc-full-img img{transform:scale(1.04);filter:saturate(.8)}
+.svc-full-body{background:var(--s2);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--b1);position:relative;overflow:hidden}
+.svc-full-body::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0px,transparent 1px,rgba(255,255,255,.011) 1px,rgba(255,255,255,.011) 2px);pointer-events:none}
+.svc-full-title{font-family:var(--fd);font-size:1.8rem;letter-spacing:.05em;color:var(--t-head);margin-bottom:.9rem;position:relative;z-index:1}
+.svc-full-desc{font-size:.9rem;color:var(--t-mid);line-height:1.8;position:relative;z-index:1}
+.svc-full-body .btn{margin-top:1.4rem;position:relative;z-index:1}
+
+.cap-cta-section{padding:5rem 2.5rem;background:var(--s1);border-top:1px solid var(--b1);text-align:center;position:relative;overflow:hidden}
+.cap-cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(46,143,192,.05),transparent 70%)}
+
+/* ═══════════════════════════════════════════════════
+   SUSTAINABILITY PAGE
+═══════════════════════════════════════════════════ */
+#sust-hero{padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--s1);position:relative;overflow:hidden}
+#sust-hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(6,8,10,.92) 0%,rgba(6,8,10,.75) 50%,rgba(6,8,10,.35) 100%),repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(140,170,190,.014) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(140,170,190,.014) 40px)}
+#sust-hero .sust-bg-img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8) brightness(.7);}
+.sust-hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:5rem;align-items:center;position:relative;z-index:2}
+.sust-eyebrow{font-family:var(--fm);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem}
+.sust-eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--green)}
+.sust-h1{font-family:var(--fd);font-size:clamp(3.5rem,7vw,6.5rem);letter-spacing:.03em;line-height:.95;color:var(--t-head);margin-bottom:1.5rem}
+.sust-h1 em{font-style:normal;color:var(--green)}
+.sust-img-box{position:relative;overflow:hidden;border:1px solid var(--b2);aspect-ratio:4/3;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.sust-img-box img{width:100%;height:100%;object-fit:cover;filter:saturate(.65)}
+
+.sust-section{padding:4.5rem 2.5rem;border-bottom:1px solid var(--b1)}
+.sust-section:nth-child(even){background:var(--bg)}
+.sust-section:nth-child(odd) {background:var(--s1)}
+.sust-inner{max-width:1080px;margin:0 auto}
+.sust-2col{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.sust-war-quote{font-family:var(--fd);font-size:clamp(1.8rem,3.2vw,2.8rem);letter-spacing:.03em;line-height:1.12;color:var(--t-head);border-left:2px solid var(--green);padding-left:1.4rem;margin-bottom:2rem}
+.sust-war-quote em{font-style:normal;color:var(--green)}
+
+.pillar-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--b1);margin-top:2rem}
+.pillar{background:var(--s2);padding:2.2rem;position:relative;overflow:hidden;transition:background .22s}
+.pillar::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:var(--green)}
+.pillar::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0px,transparent 1px,rgba(255,255,255,.011) 1px,rgba(255,255,255,.011) 2px);pointer-events:none}
+.pillar:hover{background:var(--s3)}
+.pillar-ico{font-family:var(--fd);font-size:3rem;color:rgba(46,188,122,.1);position:absolute;top:1.2rem;right:1.2rem;line-height:1;z-index:1}
+.pillar-title{font-family:var(--fd);font-size:1.4rem;letter-spacing:.06em;color:var(--t-head);margin-bottom:.7rem;position:relative;z-index:1}
+.pillar-text{font-size:.87rem;color:var(--t-mid);line-height:1.75;position:relative;z-index:1}
+.pillar-img{margin-top:1.4rem;position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--b1);z-index:1}
+.pillar-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.6)}
+
+.net-tags{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.8rem}
+.n-tag{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .88rem;border:1px solid rgba(46,188,122,.28);color:var(--green);transition:all .18s}
+.n-tag:hover{background:rgba(46,188,122,.07)}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER — pure dark steel
+═══════════════════════════════════════════════════ */
+footer{background:var(--s1);padding:4rem 2.5rem 2rem;border-top:1px solid var(--b2);position:relative;overflow:hidden}
+footer::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0px,transparent 1px,rgba(255,255,255,.009) 1px,rgba(255,255,255,.009) 2px);pointer-events:none}
+.foot-top{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--b1);position:relative;z-index:1}
+.foot-logo{height:26px;width:auto;margin-bottom:1rem;filter:brightness(1.15)}
+.foot-tagline{font-size:.78rem;color:var(--t-dim);line-height:1.75;max-width:180px}
+.foot-socials{display:flex;gap:.6rem;margin-top:1.4rem}
+.foot-soc{width:32px;height:32px;border:1px solid var(--b1);display:grid;place-items:center;color:var(--t-dim);font-family:var(--fm);font-size:.52rem;transition:all .2s}
+.foot-soc:hover{border-color:var(--amber);color:var(--amber);box-shadow:0 0 8px rgba(232,144,10,.18)}
+.foot-col h4{font-family:var(--fm);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--t-head);margin-bottom:1.1rem}
+.foot-col ul{list-style:none}
+.foot-col ul li{margin-bottom:.5rem}
+.foot-col ul li a{font-size:.8rem;color:var(--t-dim);transition:color .2s}
+.foot-col ul li a:hover{color:var(--amber)}
+.foot-bottom{max-width:1080px;margin:2rem auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:var(--fm);font-size:.58rem;color:var(--t-dim);letter-spacing:.06em;position:relative;z-index:1}
+.foot-contact{display:flex;gap:2rem;flex-wrap:wrap}
+.foot-contact a{color:var(--t-dim);transition:color .2s;font-size:.75rem}
+.foot-contact a:hover{color:var(--amber)}
+
+/* keyframes */
+@keyframes heroUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes mapPing{0%{box-shadow:0 0 0 0 rgba(232,144,10,.7)}70%{box-shadow:0 0 0 12px rgba(232,144,10,0)}100%{box-shadow:0 0 0 0 rgba(232,144,10,0)}}
+
+/* ═══════════════════════════════════════════════════
+   INTRO OVERLAY — Netflix-style pitch black boot
+   Pure #000 · white logo only · tudum animation
+═══════════════════════════════════════════════════ */
+#intro-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #000000;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+#intro-overlay.fade-out {
+  animation: overlayFadeOut 1.1s cubic-bezier(.77,0,.18,1) forwards;
+}
+@keyframes overlayFadeOut {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.06); pointer-events: none; }
+}
+
+/* hidden elements — keep for JS compat but invisible */
+.intro-grid, .intro-scan, .intro-corner, .intro-status, .intro-rule,
+.intro-tagline, .intro-bar-wrap { display: none !important; }
+
+/* Netflix-style logo reveal container */
+.intro-center {
+  position: relative; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+
+/* The ENGINUITY logo text — pure white, Netflix-style */
+.intro-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 15vw, 13rem);
+  letter-spacing: .14em;
+  line-height: 1;
+  color: #ffffff;
+  /* start invisible, then tudum-stamp in */
+  opacity: 0;
+  transform: scale(2.4);
+  animation: netflixTudum 0.55s 0.3s cubic-bezier(.15,.5,.3,1) forwards;
+  filter: drop-shadow(0 0 0px rgba(255,255,255,0));
+  display: block;
+}
+/* Hide individual character spans — show block text only */
+.intro-brand .ch {
+  display: inline;
+  color: #ffffff;
+  background: none;
+  -webkit-text-fill-color: #ffffff;
+  -webkit-text-stroke: 0;
+  transform: none;
+  opacity: 1;
+  animation: none;
+}
+.intro-brand .ch.lit {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: #ffffff;
+  background-clip: unset;
+  filter: none;
+}
+
+/* Netflix "tudum" stamp: large → snaps to normal → brief glow pulse */
+@keyframes netflixTudum {
+  0%   { opacity: 0;   transform: scale(2.4);  filter: drop-shadow(0 0 0px rgba(255,255,255,0)); }
+  55%  { opacity: 1;   transform: scale(0.92); filter: drop-shadow(0 0 60px rgba(255,255,255,.9)); }
+  70%  { opacity: 1;   transform: scale(1.04); filter: drop-shadow(0 0 30px rgba(255,255,255,.6)); }
+  85%  { opacity: 1;   transform: scale(0.99); filter: drop-shadow(0 0 15px rgba(255,255,255,.3)); }
+  100% { opacity: 1;   transform: scale(1);    filter: drop-shadow(0 0 6px rgba(255,255,255,.1)); }
+}
+
+@keyframes taglineIn { to { opacity: 1; transform: translateY(0); } }
+
+
+/* ═══════════════════════════════════════════════════
+   VIDEO SCREEN — true fullscreen intro video
+   Pitch black · video fills viewport · skip only
+═══════════════════════════════════════════════════ */
+#video-screen {
+  position: fixed; inset: 0; z-index: 9998;
+  background: #000000;
+  display: flex; flex-direction: column; align-items: stretch; justify-content: stretch;
+  opacity: 0; pointer-events: none;
+  transition: opacity .8s cubic-bezier(.22,1,.36,1);
+}
+#video-screen.visible {
+  opacity: 1; pointer-events: all;
+}
+#video-screen.fade-out {
+  animation: vsOut .9s cubic-bezier(.77,0,.18,1) forwards;
+}
+@keyframes vsOut {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.03); }
+}
+
+/* video fills the entire screen */
+.vs-video-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: unset;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+  opacity: 0; transform: none;
+  animation: vsVideoIn .6s .1s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes vsVideoIn { to { opacity:1; transform:none; } }
+
+.vs-video-container iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+}
+
+/* remove amber corner accents */
+.vs-video-container::before, .vs-video-container::after { display: none; }
+
+/* controls row — anchored bottom-right, cinematic style */
+.vs-controls {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  display: flex; align-items: center; gap: .75rem;
+  z-index: 10;
+  opacity: 0; animation: taglineIn .5s 1.2s forwards;
+}
+
+.vs-btn {
+  font-family: var(--fm); font-size: .6rem; letter-spacing: .18em;
+  text-transform: uppercase; border: none; cursor: pointer;
+  display: flex; align-items: center; gap: .5rem;
+  transition: all .2s;
+}
+.vs-btn-mute {
+  background: rgba(0,0,0,.45); color: rgba(255,255,255,.8);
+  border: 1px solid rgba(255,255,255,.15);
+  padding: .55rem 1.1rem;
+  backdrop-filter: blur(8px);
+  border-radius: 2px;
+}
+.vs-btn-mute:hover { border-color: rgba(255,255,255,.4); color:#fff; }
+
+.vs-btn-skip {
+  background: transparent; color: rgba(255,255,255,.9);
+  border: 1px solid rgba(255,255,255,.2);
+  padding: .55rem 1.4rem;
+  backdrop-filter: blur(8px);
+  border-radius: 2px;
+  font-weight: 600;
+  transition: background .2s, border-color .2s;
+}
+.vs-btn-skip:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.5); color: #fff; }
+
+/* mute icon */
+.vs-icon { width: 14px; height: 14px; flex-shrink: 0; }
+
+
+/* ═══════════════════════════════════════════════════
+   ADVANCED SCROLL ANIMATION UPGRADES
+   Parallax layers, pin sections, reveal masks
+═══════════════════════════════════════════════════ */
+
+/* Staggered word reveal — text split into words */
+.reveal-words .word {
+  display: inline-block; overflow: hidden; vertical-align: bottom;
+  padding-bottom: .08em;
+}
+.reveal-words .word span {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform .7s cubic-bezier(.22,1,.36,1), opacity .5s ease;
+}
+.reveal-words.in .word span { transform: translateY(0); opacity: 1; }
+
+/* clip-reveal — element slides in from behind a mask */
+.clip-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(.22,1,.36,1);
+}
+.clip-reveal.in { clip-path: inset(0 0% 0 0); }
+
+/* counter numbers */
+.count-num {
+  display: inline-block;
+  transition: none;
+}
+
+/* line draw — SVG horizontal rule */
+.line-draw {
+  width: 0; height: 1px; background: var(--b2); display: block;
+  transition: width 1.2s cubic-bezier(.22,1,.36,1);
+}
+.line-draw.in { width: 100%; }
+
+/* image parallax container */
+.parallax-img {
+  overflow: hidden; position: relative;
+}
+.parallax-img img {
+  transform: scale(1.15) translateY(0);
+  transition: transform 0s; /* driven by JS */
+  will-change: transform;
+}
+
+/* section entrance — wipe from left amber bar */
+.section-wipe {
+  position: relative;
+}
+.section-wipe::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 3px; height: 0;
+  background: linear-gradient(180deg, var(--amber), transparent);
+  transition: height 1.4s cubic-bezier(.22,1,.36,1);
+}
+.section-wipe.in::before { height: 100%; }
+
+/* floating labels that appear on scroll */
+.float-label {
+  font-family: var(--fm); font-size: .52rem; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--t-dim);
+  transform: translateX(-12px); opacity: 0;
+  transition: transform .6s cubic-bezier(.22,1,.36,1), opacity .6s;
+}
+.float-label.in { transform: translateX(0); opacity: 1; }
+
+/* card 3D tilt effect */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform .1s linear, box-shadow .3s;
+}
+.tilt-card:hover {
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+
+/* progress indicator on right side */
+#scroll-progress {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  z-index: 400; display: flex; flex-direction: column; gap: 10px;
+  opacity: 0; transition: opacity .4s;
+}
+#scroll-progress.visible { opacity: 1; }
+.sp-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--b2); border: 1px solid var(--b3);
+  transition: all .3s; cursor: pointer;
+}
+.sp-dot.active {
+  background: var(--amber); border-color: var(--amber);
+  box-shadow: 0 0 8px rgba(232,144,10,.5);
+  transform: scale(1.4);
+}
+
+/* horizontal scroll marquee */
+.marquee-track {
+  overflow: hidden; white-space: nowrap;
+  border-top: 1px solid var(--b1);
+  border-bottom: 1px solid var(--b1);
+  padding: 1rem 0;
+  background: var(--s1);
+}
+.marquee-inner {
+  display: inline-flex; gap: 3rem;
+  animation: marqueeRun 28s linear infinite;
+}
+.marquee-inner:hover { animation-play-state: paused; }
+@keyframes marqueeRun { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.marquee-item {
+  font-family: var(--fm); font-size: .62rem; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--t-mid);
+  display: flex; align-items: center; gap: 1.2rem; flex-shrink: 0;
+}
+.marquee-item::after {
+  content: '·'; color: var(--amber); font-size: 1.2rem;
+}
+
+/* number counter animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ambient glow on sections */
+.glow-section {
+  position: relative;
+}
+.glow-section::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%; height: 60%;
+  background: radial-gradient(ellipse, rgba(46,143,192,.04) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  opacity: 0; transition: opacity 1.2s;
+}
+.glow-section.in::after { opacity: 1; }
+
+/* responsive */
+@media(max-width:1024px){.prob-grid{grid-template-columns:repeat(2,1fr)}.prob-card:nth-child(2){border-right:none}.prob-card:nth-child(3){border-right:1px solid var(--b1);border-top:1px solid var(--b1)}.prob-card:nth-child(4){border-top:1px solid var(--b1)}.foot-top{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:900px){
+  .hero-stats-inner{grid-template-columns:repeat(2,1fr)}
+  .wwd-inner,.recent-inner{grid-template-columns:1fr;gap:3rem}
+  .india-header{grid-template-columns:1fr}.india-cards{grid-template-columns:1fr}
+  .how-steps{grid-template-columns:1fr;border:none;gap:1px}.how-step{border:1px solid var(--b1)}
+  .prov-grid{grid-template-columns:1fr 1fr}.serve-grid{grid-template-columns:repeat(2,1fr)}
+  .showcase-inner{grid-template-columns:1fr}.showcase-body{border-left:none;border-right:none;border-top:1px solid var(--b1)}
+  .showcase-slide:nth-child(even) .showcase-inner{direction:ltr}.showcase-slide:nth-child(even) .showcase-body{border-right:none;border-left:none;border-top:1px solid var(--b1)}
+  .cap-hero-inner,.sust-hero-inner{grid-template-columns:1fr;gap:3rem}
+  .svc-grid{grid-template-columns:1fr}.svc-full{grid-template-columns:1fr}
+  .sust-2col{grid-template-columns:1fr}.pillar-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr 1fr}.showcase-header{grid-template-columns:1fr}
+  #india .sa.sa-up.sd2[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+}
+@media(max-width:600px){
+  .prob-grid{grid-template-columns:1fr}.serve-grid{grid-template-columns:1fr}.prov-grid{grid-template-columns:1fr}.foot-top{grid-template-columns:1fr}
+  header{padding:0 1.2rem}nav a:not(.nav-cta){display:none}
+  .hero-h1{font-size:clamp(3.5rem,17vw,5.5rem)}
 }
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#main">Skip to main content</a>
-<a class="skip-link" href="#nav">Skip to navigation</a>
+<!-- ═══════════════════════════════════════════════════
+     CINEMATIC INTRO — Logo stamp → fullscreen video
+     Phase 1: Logo on pure black (2.2s)
+     Phase 2: Logo fades, fullscreen video plays
+     User must watch to end OR click Skip
+═══════════════════════════════════════════════════ -->
 
-<!-- ══ TOP BAR ══ -->
+<!-- PHASE 1: Logo stamp overlay -->
+<div id="intro-overlay" style="position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+  <div class="intro-center">
+    <div class="intro-brand" id="introBrand">
+      <span class="ch" data-i="0">E</span><span class="ch" data-i="1">N</span><span class="ch" data-i="2">G</span><span class="ch" data-i="3">I</span><span class="ch" data-i="4">N</span><span class="ch" data-i="5">U</span><span class="ch" data-i="6">I</span><span class="ch" data-i="7">T</span><span class="ch" data-i="8">Y</span>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2: Cinematic fullscreen video screen -->
+<div id="video-screen">
+  <!-- Fullscreen video fills entire viewport -->
+  <div class="vs-video-container" id="vsVideoWrap">
+    <iframe id="vsIframe"
+      src="https://video.pictory.ai/embed/202603211807547447bbdf9db9d0142029b35c82c78dc004a/20260321184045882iktWMDDl4JZ9nLi"
+      title="Your Go-To Custom Precision Manufacturing Execution Engine"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- Top gradient fade -->
+  <div style="position:absolute;top:0;left:0;width:100%;height:18%;background:linear-gradient(to bottom,rgba(0,0,0,0.65),transparent);z-index:2;pointer-events:none;"></div>
+  <!-- Bottom gradient fade -->
+  <div style="position:absolute;bottom:0;left:0;width:100%;height:22%;background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);z-index:2;pointer-events:none;"></div>
+
+  <!-- Subtle top-left watermark -->
+  <div style="position:absolute;top:2rem;left:2rem;z-index:5;display:flex;align-items:center;gap:.75rem;opacity:0;animation:taglineIn .6s 1s forwards;">
+    <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SROmeuQbJ_AjbYGkgy1PlJYoZ6oE14soBsEEEGdkPG9fwYmovOL2aonei9GNYNvUshkQbHNh8I3mnu8xA6ocK7SC88RKH8yEng3lAPp0080kOu_SojKxUX7t4NfQcxLt3UJ1kgikNgQvnRJCU5bMYNjBrXmewUkhxcIrZeJwqLZkR5qzeejFiRjPT4=w16383" alt="Enginuity" style="height:22px;filter:brightness(0) invert(1);opacity:.7;"/>
+  </div>
+
+  <!-- Bottom-right controls -->
+  <div class="vs-controls">
+    <!-- Playing now label -->
+    <div style="display:flex;flex-direction:column;align-items:flex-end;opacity:.6;margin-right:.5rem;">
+      <span style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#fff;">ENGINUITY Intro</span>
+      <span style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;font-weight:600;">Playing Now</span>
+    </div>
+
+    <button class="vs-btn vs-btn-skip" onclick="skipVideo()" style="display:flex;align-items:center;gap:.5rem;">
+      SKIP <span id="skipCountdown" style="opacity:.5;font-size:.55rem;">IN <span id="seconds">5</span>s</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- SCROLL PROGRESS DOTS -->
+<div id="scroll-progress">
+  <div class="sp-dot active" data-section="hero" title="Top"></div>
+  <div class="sp-dot" data-section="problems" title="Capabilities"></div>
+  <div class="sp-dot" data-section="what-we-do" title="What We Do"></div>
+  <div class="sp-dot" data-section="india" title="Global Reach"></div>
+  <div class="sp-dot" data-section="how-it-works" title="Process"></div>
+  <div class="sp-dot" data-section="provides" title="What We Provide"></div>
+  <div class="sp-dot" data-section="serves" title="Who We Serve"></div>
+  <div class="sp-dot" data-section="showcase" title="Showcase"></div>
+</div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- TOP BAR -->
 <div class="top-bar">
-  <a href="https://wa.me/918817751713?text=Hi%20Enginuity%20team%2C%20I%E2%80%99d%20like%20to%20discuss%20a%20manufacturing%20requirement.%20Here%20are%20my%20details%E2%80%A6" target="_blank" rel="noopener" aria-label="WhatsApp chat link">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.121 1.524 5.855L.057 23.882a.5.5 0 0 0 .614.637l6.19-1.615A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.655-.522-5.166-1.428l-.361-.214-3.737.975.998-3.647-.231-.375A9.945 9.945 0 0 1 2 12C2 6.478 6.477 2 12 2s10 4.478 10 10-4.477 10-10 10z"/></svg>
+  <a href="https://wa.me/918817751713?text=Hi%20Enginuity%20team%2C%20I%E2%80%99d%20like%20to%20discuss%20a%20manufacturing%20requirement." target="_blank" rel="noopener">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.121 1.524 5.855L.057 23.882a.5.5 0 0 0 .614.637l6.19-1.615A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.655-.522-5.166-1.428l-.361-.214-3.737.975.998-3.647-.231-.375A9.945 9.945 0 0 1 2 12C2 6.478 6.477 2 12 2s10 4.478 10 10-4.477 10-10 10z"/></svg>
     Chat with an Engineer on WhatsApp
   </a>
 </div>
 
-<!-- ══ HEADER ══ -->
-<header id="nav">
-  <a href="#" onclick="showPage('home');return false;">
-    <img class="logo-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SROmeuQbJ_AjbYGkgy1PlJYoZ6oE14soBsEEEGdkPG9fwYmovOL2aonei9GNYNvUshkQbHNh8I3mnu8xA6ocK7SC88RKH8yEng3lAPp0080kOu_SojKxUX7t4NfQcxLt3UJ1kgikNgQvnRJCU5bMYNjBrXmewUkhxcIrZeJwqLZkR5qzeejFiRjPT4=w16383" alt="Enginuity"/>
+<!-- HEADER -->
+<header>
+  <a href="#" onclick="showPage('home');return false;" class="logo-wrap">
+    <img class="logo-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SROmeuQbJ_AjbYGkgy1PlJYoZ6oE14soBsEEEGdkPG9fwYmovOL2aonei9GNYNvUshkQbHNh8I3mnu8xA6ocK7SC88RKH8yEng3lAPp0080kOu_SojKxUX7t4NfQcxLt3UJ1kgikNgQvnRJCU5bMYNjBrXmewUkhxcIrZeJwqLZkR5qzeejFiRjPT4=w16383" alt="Enginuity" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span class="logo-name" style="display:none">ENGINUITY</span>
   </a>
-  <nav>
+  <nav id="main-nav">
     <a href="#" id="nav-home" class="active" onclick="showPage('home');return false;">Home</a>
     <a href="#" id="nav-capabilities" onclick="showPage('capabilities');return false;">Capabilities</a>
     <a href="#" id="nav-sustainability" onclick="showPage('sustainability');return false;">Sustainability</a>
-    <button class="search-btn" aria-label="Search">&#9906;</button>
+    <a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="nav-cta">Schedule a Meeting</a>
   </nav>
 </header>
 
-<!-- ════════════════════════════════════════
-     HOME PAGE
-════════════════════════════════════════ -->
+
+<!-- ╔══════════════════════╗
+     ║     HOME PAGE        ║
+     ╚══════════════════════╝ -->
 <div id="page-home" class="page active">
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-img">
-      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SS3gNwXUu84ho-AhkbuxxQh_BFH7lnYRDV4pUbVN0NiBNsfmL6ya2jl--xCjXUwNm2ibaMMvGD-BNOByXM0QFboWwTpmpf_JapgHlyPNpD9gJKTddBqyg_WDfo2Hvt3QXxD4Yo8QLoBJ94F0vRtZPy723HA07ZrEWsvvDIaXJXQEnnMUs6WMIE7m6k-v7Rt4Zgat20MDkn4RPQT0BvJuGicQWTRsV2CFWgL3Oo=w1280" alt="Hero background / main banner"/>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhGKIx3oTC8VIeCas7sa0TXImphUphsJL0W6rL6Oc8Xb60E34qbjru18XO1cmYIXSFLBGQ3eLZ_bWSLfeVQvoxkDBdH8WPaWoKJHFO9DHnL1pq5mrOmiJfCl56p3CGog6uzhD25qMuxj7qgxol8tFMOqQUaK9thb4CdDJRCYuVimAoQkkBDLe-IG0IXgVk8b8W_DLJWeUek_ry39DvaqbLfaEuWidrM4fWG1p1nhDwJ98aQhtsjOIg8qj69YgP_P9qu7CoirjSJvk" alt="CNC Precision Machining"/>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-brush"></div>
+  <div class="hero-content" id="main">
+    <div class="hero-pre">Custom Precision Manufacturing Execution Engine</div>
+    <h1 class="hero-h1">
+      <span class="line1">Prototyping &amp;</span>
+      <span class="line2">Manufacturing</span>
+    </h1>
+    <p class="hero-body">From inside India's manufacturing network, we execute the most demanding custom precision manufacturing requirements — digital to physical, with full accountability.</p>
+    <div class="hero-cta-row">
+      <a href="#" onclick="showPage('capabilities');return false;" class="btn btn-amber btn-arrow">Explore Capabilities</a>
+      <a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn btn-outline">Schedule a Meeting</a>
     </div>
-    <div class="hero-grid"></div>
-    <div class="hero-content" id="main">
-      <div class="hero-pre">Custom Precision Manufacturing Execution Engine</div>
-      <h1 class="hero-h1"><div>Prototyping &amp;</div><div class="line2">Manufacturing</div></h1>
-      <p class="hero-sub">End-to-end precision manufacturing — from concept to doorstep. On-ground presence in India &amp; USA, serving the world.</p>
-      <div class="hero-cta">
-        <a href="#" onclick="showPage('capabilities');return false;" class="btn-primary">Explore Capabilities</a>
-        <a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn-ghost">Schedule a Meeting</a>
-      </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stats-inner">
+      <div class="h-stat"><div class="h-stat-num">ISO</div><div class="h-stat-lbl">Certified Manufacturer Network</div></div>
+      <div class="h-stat"><div class="h-stat-num">IN + US</div><div class="h-stat-lbl">On-Ground Presence</div></div>
+      <div class="h-stat"><div class="h-stat-num">1→10K+</div><div class="h-stat-lbl">Parts — Any Volume</div></div>
+      <div class="h-stat"><div class="h-stat-num">DFM</div><div class="h-stat-lbl">True Design for Manufacture</div></div>
     </div>
-    <div class="hero-badge"><div class="hero-badge-num">ISO</div><div class="hero-badge-lbl">Certified Network</div></div>
-    <div class="scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
-  </section>
+  </div>
+</section>
 
-  <!-- WHAT WE DO -->
-  <section id="what-we-do">
-    <div class="container">
-      <div class="section-label">01 — What We Do</div>
-      <h2 class="section-title reveal">What We Do</h2>
-      <p class="reveal body-text" style="max-width:620px;margin-bottom:1rem;">We take your design from digital to physical — executing precision prototyping and manufacturing with complete accountability from start to finish.</p>
-      <div class="video-wrap reveal">
-        <iframe src="https://www.youtube.com/embed/2ClmTAw1kdo?si=qxJCV_kT8jH30stj" title="Precision Prototyping & Manufacturing – Enginuity" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <p class="video-caption reveal">↗ What We Do – YouTube video · Enginuity · <a href="https://www.youtube.com/watch?v=2ClmTAw1kdo" target="_blank" rel="noopener">Watch on YouTube</a></p>
-    </div>
-  </section>
+<!-- MARQUEE TICKER -->
+<div class="marquee-track"><div class="marquee-inner"><span class="marquee-item">CNC Machining</span><span class="marquee-item">3D Printing</span><span class="marquee-item">Injection Molding</span><span class="marquee-item">Vacuum Casting</span><span class="marquee-item">Composite Fabrication</span><span class="marquee-item">Sheet Metal Fabrication</span><span class="marquee-item">ISO Certified Network</span><span class="marquee-item">India &amp; World</span><span class="marquee-item">DFM Optimized</span><span class="marquee-item">1 to 10000+ Parts</span><span class="marquee-item">CNC Machining</span><span class="marquee-item">3D Printing</span><span class="marquee-item">Injection Molding</span><span class="marquee-item">Vacuum Casting</span><span class="marquee-item">Composite Fabrication</span><span class="marquee-item">Sheet Metal Fabrication</span><span class="marquee-item">ISO Certified Network</span><span class="marquee-item">India &amp; World</span><span class="marquee-item">DFM Optimized</span><span class="marquee-item">1 to 10000+ Parts</span></div></div>
 
-  <!-- SERVICE BLOCK -->
-  <section id="service">
-    <div class="container">
-      <div class="service-inner">
+<!-- CAPABILITIES GRID -->
+<section id="problems">
+  <div class="prob-header">
+    <div class="sec-eyebrow sa sa-up">What We Do</div>
+    <h2 class="sec-h2 sa sa-up sd1">Capabilities we're working on</h2>
+  </div>
+  <div class="prob-grid">
+    <div class="prob-card sa sa-up sd1">
+      <div class="prob-illus"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRwy-sJnrB17ZtDlTgG6r-7jJGDxeuCmMHdXEu7ycvORSvaug9P8A_sC4Wj8g1k8CcbLKm5fNf_RDY8buQPXCjHEcUUVKdkHaYmr7x7DhIJrv073T8bdX91i6UzVdWNU_zJgX94NO_ZwRFE9tlT6nEIkjo142SVOtauNx0dctXoVY8QBHZ6TTonRsd34jOfXA4EcvJwEMng-k6RMnMgUdaQYdlRWKV4zLbi-_U=w1280" alt=""/></div>
+      <div class="prob-title">Precision Prototyping &amp; Manufacturing.</div>
+      <div class="prob-text">End-to-end custom prototyping with tight tolerances, diverse materials, and fast turnarounds from our vetted Indian network.</div>
+    </div>
+    <div class="prob-card sa sa-up sd2">
+      <div class="prob-illus"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSdMtRkIXz0jwx_M2dTbK6UOmH9z4QfUfvaa4svyiE1U3pafWm-bBmrh5Zvpso7NjAKCTMTcXI3nqkaFhuq1M_P33TUIl4Nc8Erw4qWLrfjnGHc2irnHg-6zv5JMTRBqRbcHYPX-bJn8M_WVIKdgahDv-mrEtUqaYfCr4PzP5gaM2A_UFlNJPeypbGrVgEboVp01HTPg21Kti2MySMuz8-pnX9mfm_9OoDa=w1280" alt=""/></div>
+      <div class="prob-title">Robotics, Automotive &amp; Medical.</div>
+      <div class="prob-text">High-precision components for demanding sectors where failure is not an option and tolerances are measured in microns.</div>
+    </div>
+    <div class="prob-card sa sa-up sd3">
+      <div class="prob-illus"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SR6uQhc3DGkAvwxrLNIO90c3tURA0MazAHwrSjzZgQkD2Z_Nr8TLUXx26l1oyTJQa0DRMOreFSHpvc1EH1PL6a1X1GT1IeRYDHyTZU5cfgKVG-RygSAhmLkB4lNszgZ_QEPrxShfgQbeLgGVrJ0Tg7X_CXYaGAGZI1Hfb5UvIH7ty9lltwm2jKhhUEG-QoZLCWs64J0YZRB3NrGEuc_mSF1OF2UlRazeuZSMBw=w1280" alt=""/></div>
+      <div class="prob-title">Aerospace &amp; Defence.</div>
+      <div class="prob-text">Mission-critical parts manufactured to the tightest specifications, backed by a fully vetted ISO certified supply chain.</div>
+    </div>
+    <div class="prob-card sa sa-up sd4">
+      <div class="prob-illus"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0STgH8xtS4myRn_moGd48znYLgYXBu56wrP-2F5-kb_ZNJC20WB-L8OCx2YO1nB2KlPPPpLQFIYNyI1XjI1NzC7uHM-YjPS-Q_x10nTZzTh-JDIpQ4zv-_2F2d9uoTkFqG9MjPqCD35bcF8DwZuJEu-gBZ9ClhQcIs2cTHoioCBmpMn6Z3J8NozubWE7lP_lAyp4UQ2ce-AS2jr3L7Wu53UEN51q9SXpObCn=w1280" alt=""/></div>
+      <div class="prob-title">From prototype to production scale.</div>
+      <div class="prob-text">Scale from 1 part to 100,000+ with full traceability and strategic sourcing for cost optimisation at every volume.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO + VIDEO -->
+<section id="what-we-do">
+  <div class="wwd-inner container">
+    <div>
+      <div class="sec-eyebrow sa sa-left">01 — What We Do</div>
+      <h2 class="sec-h2 sa sa-left sd1">Prototyping &amp;<br/>Manufacturing</h2>
+      <p class="body-lg sa sa-left sd2" style="margin-bottom:1.5rem">End-to-end execution for custom prototyping and manufacturing — precise, efficient, and tailored to your product's requirements.</p>
+      <div class="cap-tags sa sa-left sd3">
+        <span class="cap-tag">Prototype</span><span class="cap-tag">Manufacture</span><span class="cap-tag">True DFM</span>
+        <span class="cap-tag">3D Prints</span><span class="cap-tag">CNC Machining</span><span class="cap-tag">Injection Molding</span><span class="cap-tag">CMM</span>
+      </div>
+      <a href="#" onclick="showPage('capabilities');return false;" class="btn btn-dark btn-arrow sa sa-left sd4">Explore Our Capabilities</a>
+    </div>
+    <div class="sa sa-right">
+      <div class="video-wrap" style="position:relative;padding-top:56.25%;background:var(--panel);border:1px solid var(--b2);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);">
+        <!-- Amber corner accents -->
+        <div style="position:absolute;top:0;left:0;width:32px;height:2px;background:var(--amber);z-index:3;"></div>
+        <div style="position:absolute;top:0;left:0;width:2px;height:32px;background:var(--amber);z-index:3;"></div>
+        <!-- Muted autoplay iframe — oversize to hide YouTube chrome/controls -->
+        <iframe
+          src="https://www.youtube.com/embed/2ClmTAw1kdo?autoplay=1&mute=1&loop=1&playlist=2ClmTAw1kdo&rel=0&controls=0&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3&playsinline=1"
+          style="position:absolute;top:-10%;left:-5%;width:110%;height:120%;border:none;pointer-events:none;"
+          allow="autoplay;encrypted-media"
+          title="Precision Prototyping & Manufacturing"
+        ></iframe>
+        <!-- Transparent click-blocker so iframe doesn't steal focus -->
+        <div style="position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to top,rgba(6,8,10,.6) 0%,transparent 40%);"></div>
+        <!-- Bottom label -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:.8rem 1.2rem;z-index:3;display:flex;align-items:center;justify-content:space-between;pointer-events:none;">
+          <span style="font-family:var(--fm);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);">Precision Prototyping &amp; Manufacturing</span>
+          <a href="https://youtu.be/2ClmTAw1kdo" target="_blank" rel="noopener" style="font-family:var(--fm);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);text-decoration:none;pointer-events:all;">Watch ↗</a>
+        </div>
+      </div>
+      <p class="video-cap">↗ Precision Prototyping &amp; Manufacturing · Enginuity · <a href="https://youtu.be/2ClmTAw1kdo" target="_blank" rel="noopener">Watch on YouTube</a></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FROM INDIA — Global Reach with World Map -->
+<section id="india" style="padding:5rem 2.5rem;border-bottom:1px solid var(--b1);background:var(--s1);position:relative;">
+
+  <!-- Section header -->
+  <div class="india-header sa sa-up">
+    <div>
+      <div class="sec-eyebrow">02 — Global Reach</div>
+      <h2 class="sec-h2 sa sa-up sd1">Global Logistics<br/>Local Precision.</h2>
+    </div>
+    <div>
+      <p class="body-lg sa sa-up sd2">Operating manufacturing hubs and engineering centres across key technical corridors to minimise lead times and maximise local accountability.</p>
+    </div>
+  </div>
+
+  <!-- Two-col layout: text left, map right -->
+  <div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;" class="sa sa-up sd2">
+
+    <!-- Left: location details -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;border-top:1px solid var(--b2);padding-top:2rem;">
+      <div>
+        <h5 style="font-family:var(--fm);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t-head);margin-bottom:.5rem;">USA Operations</h5>
+        <p style="font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--t-mid);margin-bottom:.6rem;">Virginia &amp; California</p>
+        <p style="font-size:.8rem;color:var(--t-body);line-height:1.7;font-style:italic;">Strategic partnerships with Stanford University &amp; Tech Corporates.</p>
+      </div>
+      <div>
+        <h5 style="font-family:var(--fm);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t-head);margin-bottom:.5rem;">India Manufacturing</h5>
+        <p style="font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--t-mid);margin-bottom:.6rem;">New Delhi &amp; Chennai</p>
+        <p style="font-size:.8rem;color:var(--t-body);line-height:1.7;font-style:italic;">High-density production facilities &amp; ISO-certified quality hubs.</p>
+      </div>
+
+      <!-- Stats row -->
+      <div style="grid-column:1/-1;border-top:1px solid var(--b1);padding-top:1.5rem;display:flex;gap:3rem;">
         <div>
-          <div class="section-label">02 — Capabilities</div>
-          <h2 class="section-title reveal">Prototyping &amp;<br/>Manufacturing</h2>
-          <p class="service-desc reveal">End-to-end execution for custom prototyping and manufacturing — precise, efficient, and tailored to your product's requirements.</p>
-          <div class="tags reveal">
-            <span class="tag">Prototype</span><span class="tag">Manufacture</span><span class="tag">True DFM</span><span class="tag">3D Prints</span><span class="tag">CNC Machining</span><span class="tag">Injection Molding</span><span class="tag">CMM</span>
-          </div>
-          <a href="#" onclick="showPage('capabilities');return false;" class="btn-primary reveal">Explore Our Capabilities</a>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;background:linear-gradient(135deg,var(--amber),var(--amber-h));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">IN + US</div>
+          <div style="font-family:var(--fm);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t-mid);margin-top:.2rem;">On-Ground Presence</div>
         </div>
-        <div class="service-img reveal">
-          <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SToQ2tLCONKGO9PWLUA4C3c0koGKB9Xoj3SF7_05Rmw8Z_ues56oFXehutMDdLKx92i8Hu1dYZ6_yQYeleL3KrxLZQanK2na7ttwQsZ6qHltoxasJGNRVhfx26nWU1uhgXcoZn0-2p-Q-7evCvIf1LbxFyL7g_Uy9hkWbsi_MyafOSk7RLui56O9vVpGj_fVn4nb36w_6DjY7MTVD_Sx9YO0W_lEvqBUxqb=w1280" alt="CNC Machining"/>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;background:linear-gradient(135deg,var(--amber),var(--amber-h));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Global</div>
+          <div style="font-family:var(--fm);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t-mid);margin-top:.2rem;">Delivery Reach</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- FROM INDIA -->
-  <section id="india">
-    <div class="container">
-      <div class="section-label">03 — Global Reach</div>
-      <h2 class="section-title reveal">From India –<br/>To The World</h2>
-      <div class="india-text">
-        <p class="reveal">We are a deeply passionate, execution-focused team with on-ground presence in India and the USA, serving globally.</p>
-        <p class="reveal">We deliver innovative, climate-conscious manufacturing solutions across the globe. With a large network of manufacturers across India with their state-of-the-art technology and an experienced team, we create products that meet the highest standards.</p>
+    <!-- Right: World map -->
+    <div style="position:relative;aspect-ratio:16/9;background:var(--panel);border:1px solid var(--b2);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);">
+      <img
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQopJTP3qTBFPC9glwIhnLyb-TkdajdFk3eEB-NXJ0ksFRs_nsDqq953BGHK2BZZ33jNsQOWO7Lh0m7tXnuzyZpr3hFGJQzw2JRIUWueTAzhG9Hi1Ysa8SBw_aYaQetZ5cz17kSVXu1li6xYFslPnFdDxaKZBG0LXK1o5xmBPAvvFddOAHn0J1j4sZZxf3CeSNphx4bFLfBQWn02lgl-6DG9WjTJ3-tvuIDttqts050mygF-KqPBQTv7ytKL4Gf1XO9REYWKHv15I"
+        alt="Global manufacturing reach"
+        style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.45) contrast(1.2);mix-blend-mode:luminosity;"
+      />
+      <!-- Steel-blue tint overlay -->
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(46,143,192,.08) 0%,transparent 60%);pointer-events:none;"></div>
+      <!-- Pulsing dots for India and USA -->
+      <!-- India dot -->
+      <div style="position:absolute;top:54%;left:68%;transform:translate(-50%,-50%);">
+        <span style="display:block;width:10px;height:10px;background:var(--amber);border-radius:50%;box-shadow:0 0 0 0 rgba(232,144,10,.7);animation:mapPing 1.8s ease-out infinite;"></span>
+        <span style="position:absolute;top:14px;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);white-space:nowrap;">India</span>
       </div>
-      <div class="cap-cards">
-        <a href="https://www.enginuity.in/capabilities" target="_blank" rel="noopener" class="cap-card reveal">
-          <div class="cap-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0STmRqPUcrQYWx1DfzZ3dlYrsa_pcayVVyDwmLicBXLx6FnSXPQLUBPijXcz5pfFHBL2oh3BOFsYksFCqIu3Lb2wCPEVLHDWyRkM6YvbOrb-NdRZJ6oKljpO7reZ5eGmsdTfK-tDSoia7eiXR2RSHSA9P0DB5AhzjFV65GKRCUUPLC7gZFJvFao0GJaOanvS6q99vm_8HPOfPB4wwf-vfGuObvFjguC15Ml2m9Q=w1280" alt="Card – Precision Prototyping & Manufacturing"/></div>
-          <div class="cap-card-body"><div class="cap-card-title">Precision Prototyping &amp; Manufacturing</div><div class="cap-card-arrow">Explore →</div></div>
-        </a>
-        <a href="https://www.enginuity.in/capabilities" target="_blank" rel="noopener" class="cap-card reveal">
-          <div class="cap-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SS3gNwXUu84ho-AhkbuxxQh_BFH7lnYRDV4pUbVN0NiBNsfmL6ya2jl--xCjXUwNm2ibaMMvGD-BNOByXM0QFboWwTpmpf_JapgHlyPNpD9gJKTddBqyg_WDfo2Hvt3QXxD4Yo8QLoBJ94F0vRtZPy723HA07ZrEWsvvDIaXJXQEnnMUs6WMIE7m6k-v7Rt4Zgat20MDkn4RPQT0BvJuGicQWTRsV2CFWgL3Oo=w1280" alt="Card – Robotics, Automotive & Medical"/></div>
-          <div class="cap-card-body"><div class="cap-card-title">Robotics, Automotive &amp; Medical</div><div class="cap-card-arrow">Explore →</div></div>
-        </a>
-        <a href="https://www.enginuity.in/capabilities" target="_blank" rel="noopener" class="cap-card reveal">
-          <div class="cap-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SToQ2tLCONKGO9PWLUA4C3c0koGKB9Xoj3SF7_05Rmw8Z_ues56oFXehutMDdLKx92i8Hu1dYZ6_yQYeleL3KrxLZQanK2na7ttwQsZ6qHltoxasJGNRVhfx26nWU1uhgXcoZn0-2p-Q-7evCvIf1LbxFyL7g_Uy9hkWbsi_MyafOSk7RLui56O9vVpGj_fVn4nb36w_6DjY7MTVD_Sx9YO0W_lEvqBUxqb=w1280" alt="Card – Aerospace & Defence"/></div>
-          <div class="cap-card-body"><div class="cap-card-title">Aerospace &amp; Defence</div><div class="cap-card-arrow">Explore →</div></div>
-        </a>
+      <!-- USA dot -->
+      <div style="position:absolute;top:38%;left:20%;transform:translate(-50%,-50%);">
+        <span style="display:block;width:10px;height:10px;background:var(--amber);border-radius:50%;box-shadow:0 0 0 0 rgba(232,144,10,.7);animation:mapPing 1.8s .6s ease-out infinite;"></span>
+        <span style="position:absolute;top:14px;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);white-space:nowrap;">USA</span>
       </div>
+      <!-- Connecting line SVG -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 100 56" preserveAspectRatio="none">
+        <path d="M 20 21 Q 44 10 68 30" stroke="rgba(232,144,10,.25)" stroke-width=".4" fill="none" stroke-dasharray="2 1.5"/>
+      </svg>
     </div>
-  </section>
+  </div>
 
-  <!-- CAROUSEL -->
-  <div id="carousel">
-    <div class="carousel-strip" id="carouselStrip">
-      <div class="carousel-item">
-        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRjQS9b2e38WzH9UAZmMMYwCb5nER3vAo_XDUWwtcTwX_XundOuNRRRSUZ15IEX7KVUL_pRhnA2qNAPERxbSq3IkrI8HrVLFCY9X5Hdj9TC3_ggZ7JQ_BUFAmOSWgPEOrHIydF3plLPLbZcMECgR1ovx34hCkMo5dR27j1Vl6GvwH8kRwNjJNmb8CdqK1ehcx3t_UVEczHxZIb3TF48OQ-W-N7tQHIqFpilkyc=w1280" alt="CNC"/>
-        <div class="ci-ov"></div><span class="ci-label">CNC Precision Parts</span>
+
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="how-inner">
+    <div class="sec-eyebrow sa sa-up">03 — Process</div>
+    <h2 class="sec-h2 sa sa-up sd1">How It Works</h2>
+    <div class="how-sub sa sa-up sd2">Digital ─── to ─── Physical</div>
+    <div class="how-steps sa sa-scale sd2">
+      <div class="how-step"><div class="how-step-num">01</div><div class="how-step-name">Your Design</div></div>
+      <div class="how-step"><div class="how-step-num">02</div><div class="how-step-name">DFM / Feasibility</div></div>
+      <div class="how-step"><div class="how-step-num">03</div><div class="how-step-name">Manufacturing Execution</div></div>
+      <div class="how-step"><div class="how-step-num">04</div><div class="how-step-name">Inspection</div></div>
+      <div class="how-step"><div class="how-step-num">05</div><div class="how-step-name">Doorstep Delivery</div></div>
+    </div>
+    <div class="how-note sa sa-up sd3">Execution Through Our Growing Network of Only Intensely Vetted ISO Certified Indian Manufacturers</div>
+  </div>
+</section>
+
+<!-- WHAT WE PROVIDE -->
+<section id="provides" style="position:relative;overflow:hidden;">
+  <!-- Subtle background image -->
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=1600&q=80&fit=crop" alt="Manufacturing precision" style="width:100%;height:100%;object-fit:cover;filter:saturate(.2) brightness(.12);"/>
+  </div>
+  <div class="container" style="position:relative;z-index:1;"><div class="sec-eyebrow sa sa-up">04 — Our Commitment</div><h2 class="sec-h2 sa sa-up sd1">What We Provide</h2></div>
+  <div class="prov-grid container" style="position:relative;z-index:1;">
+    <div class="prov-cell sa sa-up sd1"><div class="prov-dot"></div><div class="prov-name">Reliability</div></div>
+    <div class="prov-cell sa sa-up sd2"><div class="prov-dot"></div><div class="prov-name">Accountability</div></div>
+    <div class="prov-cell sa sa-up sd3"><div class="prov-dot"></div><div class="prov-name">Visibility &amp; Transparency</div></div>
+    <div class="prov-cell sa sa-up sd4"><div class="prov-dot"></div><div class="prov-name">Timely Updates</div></div>
+    <div class="prov-cell sa sa-up sd5"><div class="prov-dot"></div><div class="prov-name">Clear Communication</div></div>
+    <div class="prov-cell sa sa-up sd6"><div class="prov-dot"></div><div class="prov-name">Predictability</div></div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section id="serves">
+  <div class="container"><div class="sec-eyebrow sa sa-up">05 — Clientele</div><h2 class="sec-h2 sa sa-up sd1">Who We Serve</h2></div>
+  <div class="serve-grid container">
+    <div class="serve-card sa sa-up sd1"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&fit=crop" alt="Startups"/><div class="serve-ov"></div><div class="serve-body"><div class="serve-tag">Early Stage</div><div class="serve-name">Startups</div></div></div>
+    <div class="serve-card sa sa-up sd2"><img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=600&q=80&fit=crop" alt="MSMEs"/><div class="serve-ov"></div><div class="serve-body"><div class="serve-tag">Growth Stage</div><div class="serve-name">MSMEs / SMBs</div></div></div>
+    <div class="serve-card sa sa-up sd3"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&fit=crop" alt="Corporates"/><div class="serve-ov"></div><div class="serve-body"><div class="serve-tag">Enterprise</div><div class="serve-name">Corporates</div></div></div>
+    <div class="serve-card sa sa-up sd4"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80&fit=crop" alt="Research"/><div class="serve-ov"></div><div class="serve-body"><div class="serve-tag">R&amp;D</div><div class="serve-name">Research Projects</div></div></div>
+  </div>
+</section>
+
+<!-- IMAGE SHOWCASE — 3 big slides -->
+<section id="showcase">
+  <div class="showcase-header">
+    <div><div class="sec-eyebrow sa sa-up">06 — Featured Projects</div><h2 class="sec-h2 sa sa-up sd1">From Our Workshop<br/>To The World</h2></div>
+    <div><p class="body-lg sa sa-right sd2">Three real projects. Three continents of impact. One execution engine.</p></div>
+  </div>
+
+  <div class="showcase-slide">
+    <div class="showcase-inner">
+      <div class="showcase-img" style="position:relative;overflow:hidden;">
+        <iframe
+          src="https://www.youtube.com/embed/-6lKpcF7L3A?autoplay=1&mute=1&loop=1&playlist=-6lKpcF7L3A&rel=0&controls=0&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3"
+          style="position:absolute;top:-10%;left:-5%;width:110%;height:120%;border:none;pointer-events:none;"
+          allow="autoplay;encrypted-media"
+          title="Stanford CNC Project"
+        ></iframe>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(140,170,190,.07) 0%,transparent 50%);pointer-events:none;"></div>
       </div>
-      <div class="carousel-item">
-        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQcS2PFkyyDwqnip6IOgkAMFNYS1M5lR2g8uaBxTMZnAsBOGNw4xhAmDlllbyyN6TgRX2-_k4t8hlfUZ-uZOSEeVkC8KQMV2njHaqCI2gQAOnK8AD3rHEiz0Naj82tLke_C3uMD7-v07RGNCiQGBomsalPaah_UDJyVUqEnA8jXrvHCOGtw7LONCVsHFQZFACX4H7s8s33NyhYyeEYqgn-ScmT1f472vMPJ=w1280" alt="Robotics"/>
-        <div class="ci-ov"></div><span class="ci-label">Robotics &amp; Automotive</span>
-      </div>
-      <div class="carousel-item">
-        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQaiOPB6EXekpS6Eb7221dLbThKhHBJSONyxehQAvAfw0wDSUzbrnf84otfFFGehAGAJajCDB0g1Hssn-3cEyOj79SolpN62-twOQn-HQ9vr7Y_BA09dpe7yrcvzjwzl_gHM7fq6FukkHXC8HG_JUn-2QAiCgasK60cvOnFeEZWfWEBqg37hMRlxKySWdtwp6u6FhfxHPX7ES6d6DfE_4fnIVOhWuCscY8K20s=w1280" alt="Aerospace"/>
-        <div class="ci-ov"></div><span class="ci-label">Aerospace &amp; Defence</span>
-      </div>
-      <div class="carousel-item">
-        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STVI0ez2h2LnoBig_d04frP40gr1CejB5SZw161nGNCbDQh4PD4sUkrRYDtWSmrNp4koiTwVT4R2mAMOrb1bKWZ90tQdx6QrxaW9mptNe72e606INvfzQbeqyilykRGXYcQV1bGeFBSpkmrYBr4uPCRW8jWptW9rYUQEDwzyl37UnPu3TgW-3j9G-27PDtedTP3arKj7q1gb3FqvphMxE74oFU6M51B5GWYokc=w1280" alt="Manufacturing"/>
-        <div class="ci-ov"></div><span class="ci-label">Precision Manufacturing</span>
+      <div class="showcase-body" data-num="01">
+        <div class="slide-num">Project 01 / 03</div>
+        <div class="slide-tag">Featured · CNC Machining · India → USA</div>
+        <div class="slide-title">From Enginuity to Stanford University</div>
+        <div class="slide-desc">High-precision CNC machined components delivered from our network in India directly to Stanford University, USA — on spec, on time, with zero compromise.</div>
+        <a href="https://youtu.be/-6lKpcF7L3A" target="_blank" rel="noopener" class="slide-link">Watch on YouTube →</a>
       </div>
     </div>
   </div>
 
-  <!-- HOW IT WORKS -->
-  <section id="how-it-works">
-    <div class="container">
-      <div class="section-label">04 — Process</div>
-      <h2 class="section-title reveal">How It Works</h2>
-      <div class="process-sub reveal">Digital ─── to ─── Physical</div>
-      <div class="process-flow reveal">
-        <div class="p-step"><div class="step-box"><div class="step-num">01</div><div class="step-name">Your Design</div></div></div>
-        <span class="step-arr">→</span>
-        <div class="p-step"><div class="step-box"><div class="step-num">02</div><div class="step-name">DFM / Feasibility</div></div></div>
-        <span class="step-arr">→</span>
-        <div class="p-step"><div class="step-box"><div class="step-num">03</div><div class="step-name">Manufacturing</div></div></div>
-        <span class="step-arr">→</span>
-        <div class="p-step"><div class="step-box"><div class="step-num">04</div><div class="step-name">Inspection</div></div></div>
-        <span class="step-arr">→</span>
-        <div class="p-step"><div class="step-box"><div class="step-num">05</div><div class="step-name">Doorstep Delivery</div></div></div>
+  <div class="showcase-slide">
+    <div class="showcase-inner">
+      <div class="showcase-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRjQS9b2e38WzH9UAZmMMYwCb5nER3vAo_XDUWwtcTwX_XundOuNRRRSUZ15IEX7KVUL_pRhnA2qNAPERxbSq3IkrI8HrVLFCY9X5Hdj9TC3_ggZ7JQ_BUFAmOSWgPEOrHIydF3plLPLbZcMECgR1ovx34hCkMo5dR27j1Vl6GvwH8kRwNjJNmb8CdqK1ehcx3t_UVEczHxZIb3TF48OQ-W-N7tQHIqFpilkyc=w1280" alt="Aerospace CNC Parts"/></div>
+      <div class="showcase-body" data-num="02">
+        <div class="slide-num">Project 02 / 03</div>
+        <div class="slide-tag">Precision Machining · Aerospace Grade</div>
+        <div class="slide-title">Aerospace-Grade CNC Precision Parts</div>
+        <div class="slide-desc">5-axis CNC machining to aerospace tolerances. Aluminium, titanium, and stainless steel components manufactured in our ISO certified network and delivered globally.</div>
+        <a href="#" onclick="showPage('capabilities');return false;" class="slide-link">View capabilities →</a>
       </div>
-      <div class="iso-note reveal">Execution through our growing network of only intensely vetted ISO Certified Indian Manufacturers</div>
-    </div>
-  </section>
-
-  <!-- WHAT WE PROVIDE -->
-  <section id="what-we-provide">
-    <div class="container">
-      <div class="section-label">05 — Our Commitment</div>
-      <h2 class="section-title reveal">What We Provide</h2>
-      <div class="value-grid">
-        <div class="value-cell reveal"><div class="v-dot"></div><div class="v-name">Reliability</div></div>
-        <div class="value-cell reveal"><div class="v-dot"></div><div class="v-name">Accountability</div></div>
-        <div class="value-cell reveal"><div class="v-dot"></div><div class="v-name">Visibility &amp; Transparency</div></div>
-        <div class="value-cell reveal"><div class="v-dot"></div><div class="v-name">Timely Updates</div></div>
-        <div class="value-cell reveal"><div class="v-dot"></div><div class="v-name">Clear Communication</div></div>
-        <div class="value-cell reveal"><div class="v-dot"></div><div class="v-name">Predictability</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHO WE SERVE -->
-  <section id="who-we-serve">
-    <div class="container">
-      <div class="section-label">06 — Clientele</div>
-      <h2 class="section-title reveal">Who We Serve</h2>
-      <div class="aud-grid">
-        <div class="aud-card reveal">
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&fit=crop" alt="Startups"/>
-          <div class="aud-ov"></div>
-          <div class="aud-body"><div class="aud-tag">Early Stage</div><div class="aud-name">Startups</div></div>
-        </div>
-        <div class="aud-card reveal">
-          <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=600&q=80&fit=crop" alt="MSMEs SMBs"/>
-          <div class="aud-ov"></div>
-          <div class="aud-body"><div class="aud-tag">Growth Stage</div><div class="aud-name">MSMEs / SMBs</div></div>
-        </div>
-        <div class="aud-card reveal">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&fit=crop" alt="Corporates"/>
-          <div class="aud-ov"></div>
-          <div class="aud-body"><div class="aud-tag">Enterprise</div><div class="aud-name">Corporates</div></div>
-        </div>
-        <div class="aud-card reveal">
-          <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80&fit=crop" alt="Research"/>
-          <div class="aud-ov"></div>
-          <div class="aud-body"><div class="aud-tag">R&amp;D</div><div class="aud-name">Research Projects</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RECENT PROJECT -->
-  <section id="recent-project">
-    <div class="container">
-      <div class="section-label">07 — Featured Work</div>
-      <h2 class="section-title reveal">Our Most Recent Project</h2>
-      <p class="reveal body-text" style="max-width:620px;margin-bottom:1rem;">High Precision CNC Machining from our facilities in India, delivered to Stanford University, USA.</p>
-      <div class="video-wrap reveal">
-        <iframe src="https://www.youtube.com/embed/-6lKpcF7L3A?si=EivwqVryOme_GXPe" title="From Enginuity to Stanford University | High Precision CNC Machining Project | India to USA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <p class="video-caption reveal">↗ Recent Project – YouTube video (Project ?) · Enginuity · <a href="https://www.youtube.com/watch?v=-6lKpcF7L3A" target="_blank" rel="noopener">Watch on YouTube</a></p>
-    </div>
-  </section>
-
-  <!-- PROJECT CTA -->
-  <section id="project-cta">
-    <div class="container">
-      <div class="cta-q">Project ?</div>
-      <div class="cta-ey">Have something to build?</div>
-      <div class="cta-sub">Let's turn your design into reality — precisely.</div>
-      <a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn-primary">Schedule a Meeting With Us</a>
-    </div>
-  </section>
-
-  <!-- IP -->
-  <div id="ip-assurance">
-    <div class="ip-text">
-      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Your IP is Safe With Us
-      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     </div>
   </div>
 
-</div><!-- /page-home -->
+  <div class="showcase-slide">
+    <div class="showcase-inner">
+      <div class="showcase-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0STgH8xtS4myRn_moGd48znYLgYXBu56wrP-2F5-kb_ZNJC20WB-L8OCx2YO1nB2KlPPPpLQFIYNyI1XjI1NzC7uHM-YjPS-Q_x10nTZzTh-JDIpQ4zv-_2F2d9uoTkFqG9MjPqCD35bcF8DwZuJEu-gBZ9ClhQcIs2cTHoioCBmpMn6Z3J8NozubWE7lP_lAyp4UQ2ce-AS2jr3L7Wu53UEN51q9SXpObCn=w1280" alt="Rapid Prototyping"/></div>
+      <div class="showcase-body" data-num="03">
+        <div class="slide-num">Project 03 / 03</div>
+        <div class="slide-tag">Rapid Prototyping · DFM · End-to-End</div>
+        <div class="slide-title">Zero to Prototype in Record Time</div>
+        <div class="slide-desc">From CAD file to physical prototype — DFM review, material selection, manufacturing, CMM inspection, and doorstep delivery in days. Send us your design.</div>
+        <a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="slide-link">Start your project →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENT VIDEO -->
+<section id="recent">
+  <div class="recent-inner">
+    <div>
+      <div class="sec-eyebrow sa sa-left">07 — Featured Work</div>
+      <h2 class="sec-h2 sa sa-left sd1">Our Most Recent Project</h2>
+      <p class="body-lg sa sa-left sd2" style="margin-bottom:1.5rem">High Precision CNC Machining from our facilities in India, delivered to Stanford University, USA — showcasing our end-to-end execution capability.</p>
+      <a href="https://youtu.be/-6lKpcF7L3A" target="_blank" rel="noopener" class="btn btn-dark btn-arrow sa sa-left sd3">Watch on YouTube</a>
+    </div>
+    <div class="sa sa-right">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/-6lKpcF7L3A?si=EivwqVryOme_GXPe" title="From Enginuity to Stanford University | High Precision CNC Machining" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-cap">↗ India to USA · Stanford University · <a href="https://youtu.be/-6lKpcF7L3A" target="_blank" rel="noopener">Watch on YouTube</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN CTA -->
+<section id="join">
+  <div class="join-q sa sa-scale">Project ?</div>
+  <div class="join-head sa sa-up sd1">Have something to build?</div>
+  <div class="join-sub sa sa-up sd2">Let's turn your design into reality — precisely.</div>
+  <div class="join-cta sa sa-up sd3"><a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn btn-amber">Schedule a Meeting With Us</a></div>
+</section>
+<div id="ip"><div class="ip-text"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Your IP is Safe With Us<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div></div>
+</div>
 
 
-<!-- ════════════════════════════════════════
-     CAPABILITIES PAGE
-════════════════════════════════════════ -->
+<!-- ╔══════════════════════╗
+     ║  CAPABILITIES PAGE   ║
+     ╚══════════════════════╝ -->
 <div id="page-capabilities" class="page">
-
-  <!-- HERO -->
-  <section id="cap-hero">
-    <div class="cap-hero-img">
-      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STMTe2nLwgwcJnXxIio2kNqh3gZ0QTRQBgrYPiih1Nle6YJnWZ949DX0ylRovjwKpcnD3DknuXrvD3LOMxVJiMyYZNy7oFXSUxfL_wB4y4ZM2cObY-hcxJ7rU2RhcsjM-2MvRyHvqQidY3yfxqnIevtDQRyh37kD8NiHqrNa1MVdPCEybQBVhQgveaQok0bEUdkEo0mpwkaHYX843k6GulCXWtDywqNt6bQqe8=w1280" alt="Capabilities"/>
+<section id="cap-hero">
+  <!-- Full background image -->
+  <img class="cap-bg-img" src="https://images.pexels.com/photos/7254467/pexels-photo-7254467.jpeg" alt="CNC Precision Machining"/>
+  <div class="cap-hero-inner">
+    <div>
+      <div class="sec-eyebrow anim-in">Our Full Range of Services</div>
+      <h1 style="font-family:var(--fd);font-size:clamp(3.5rem,7vw,6.5rem);letter-spacing:.03em;line-height:.95;color:var(--t-head);margin-bottom:1.5rem" class="anim-in">Capabilities</h1>
+      <p class="body-lg anim-in" style="margin-bottom:2rem;max-width:600px">From rapid prototyping to high-volume production — CNC machining, composites, sheet metal, 3D printing, vacuum casting and injection molding, all through our ISO certified network.</p>
+      <div class="cap-tags anim-in"><span class="cap-tag">CNC Machining</span><span class="cap-tag">3D Printing</span><span class="cap-tag">Injection Molding</span><span class="cap-tag">Vacuum Casting</span><span class="cap-tag">Composites</span><span class="cap-tag">Sheet Metal</span><span class="cap-tag">CMM Inspection</span><span class="cap-tag">True DFM</span></div>
+      <a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn btn-amber btn-arrow anim-in">Schedule a Meeting</a>
     </div>
-    <div class="cap-hero-content container">
-      <div class="cap-hero-title">Capabilities</div>
-      <div class="cap-hero-sub">Our Full Range of Services</div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="cap-services">
-    <div class="container">
-
-      <!-- GROUP 1 -->
-      <div class="cap-group-title reveal">Precision Machining &amp; Structural Fabrication</div>
-      <div class="service-cards">
-        <!-- CNC -->
-        <div class="svc-card reveal">
-          <div class="svc-img">
-            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQtJY9FlU03HEy3tP2zPnwT_yE6eUqTyHOB3brWEI71LC6zG8RWLxJ4aED4DayahzDjUhH1yJBuE9eX4Pm75RtyUfbE3Q8zLHoO9eflUxSAYsjYOCHYGzFrjbEmRnbpvyxZCTOngEBJRbqnTI-89Mut5aJhQlWkxU5X74BkSrozB9i1QOowFY9dAbVouPrS8zv9Ah7JgO7mGRVqFUA8RWmRKbbtxNpOnVFZuTQ=w1280" alt="CNC Machining"/>
-          </div>
-          <div class="svc-body">
-            <div class="svc-title">CNC Machining</div>
-            <div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">3-Axis, 4-Axis, 5-Axis Milling; Turning</span></div>
-            <div class="svc-row"><span class="svc-key">Finishing</span><span class="svc-val">Anodizing, Powder Coating, Heat Treatment, Surface Grinding</span></div>
-            <div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">Aluminum, Steel, SS, Brass, Copper, Titanium, Plastics</span></div>
-            <span class="svc-moq">MOQ: 1 to 10,000+ Parts</span>
-          </div>
-        </div>
-        <!-- Composite -->
-        <div class="svc-card reveal">
-          <div class="svc-img">
-            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRD2s3bZWECVPgSlUs6a0oMCKDt3wrS6AmYTzPBsJU0eC11I_HAOg0A2vqjeOqTeBXXVZHVh9stjyng_hHlzQTrMvBa13L2CZgwzi3U07idkQHt_k3u9BEYwC7I8uJdWaEOqZ9BnhcG-bvSaYjWXTZFllJv8pVS7IRol8CDx1MTBoRFFCTGi65OtHBq4HIW8CaU88NLXzgBxsNfLPbyDsWl2uX7PR1DeNpvkpc=w1280" alt="Composite Fabrication"/>
-          </div>
-          <div class="svc-body">
-            <div class="svc-title">Composite Fabrication</div>
-            <div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">Hand Layup, Vacuum Bagging, Autoclave Cure</span></div>
-            <div class="svc-row"><span class="svc-key">Finishing</span><span class="svc-val">CNC Trimming, Surface Coating</span></div>
-            <div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">Carbon Fiber, Fiberglass, Hybrid Composites</span></div>
-            <span class="svc-moq">MOQ: 1 to 2,000 Parts</span>
-          </div>
-        </div>
-        <!-- Sheet Metal -->
-        <div class="svc-card reveal">
-          <div class="svc-img">
-            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STlF_nrVcXSlHSzXk6VZoak1I0lhV7bCCHVaZj8ujePV7QqapdX-0HZ5K8KwaVSrA3Dv6o-4gHcf6S4DtCgW5pgqmVvDhzQvamk1-2jA0o6kz3A-UsSqP-B_8Jp7HuLj7lMrztwyeBimDRq1kfhcOlc9YwYVZunGXLCM3ReWwe5q15aMdgSVp-783h8T5SgSMR6SsHCpn-pQmoiY1dc27ThfOYpLLJg76kPk0U=w1280" alt="Sheet Metal Fabrication"/>
-          </div>
-          <div class="svc-body">
-            <div class="svc-title">Sheet Metal Fabrication</div>
-            <div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">Laser Cutting, Bending, Punching, Welding</span></div>
-            <div class="svc-row"><span class="svc-key">Finishing</span><span class="svc-val">Powder Coating, Plating, Anodizing</span></div>
-            <div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">Aluminum, Mild Steel, Stainless Steel, Brass</span></div>
-            <span class="svc-moq">MOQ: 1 to 5,000+ Parts</span>
-          </div>
-        </div>
+  </div>
+</section>
+<div id="cap-services">
+  <div class="cap-section">
+    <div class="cap-section-inner">
+      <div class="grp-eyebrow sa sa-up">Precision Machining &amp; Structural Fabrication</div>
+      <div class="svc-grid">
+        <div class="svc-card sa sa-up sd1"><div class="svc-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQ75SidbPaA1GWecrbMUqR3KKHTQPvnsaZWYhI5ymXT8HafnCfhluZZDhZazPWIVo7Dr39Evar-mHMvi6Wsd8cEXcrL9ZQ5IO5MfMT3wmxC7UQJ6_gs7JX7m0EOy5I9ytSeXCAn4dVSHkOfUzIc6_nud9tCDlz2f6Gtyl04RXd2h0sMrR5qZSeyPJMG1LScAMXFqEJ1-1C7OZY6obSHLAPWAxoX_H3iz6uXlr0=w1280" alt="CNC"/></div><div class="svc-card-body"><div class="svc-card-title">CNC Machining</div><div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">3-Axis, 4-Axis, 5-Axis Milling; Turning</span></div><div class="svc-row"><span class="svc-key">Secondary</span><span class="svc-val">Anodizing, Powder Coating, Heat Treatment, Surface Grinding</span></div><div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">Aluminum, Steel, SS, Brass, Copper, Titanium, Plastics</span></div><span class="svc-moq">MOQ: 1 to 10,000+ Parts</span></div></div>
+        <div class="svc-card sa sa-up sd2"><div class="svc-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQ24YmWYhsXdrRcJ5M0Du4AHQk8k10zqwf3MLFtXRLDHnc3py8xiJG9c8K7XD9NSLMEl5bx7WVP3qIg3cj1GJFLZJdbfjqKLfa_rP-h3LUeBfSrOiTcSrNEowJMuXoOrqIZCzRSQ1e85wbjynsrKHM6dRKd06n9CVUeVrukqZ0bb_-I_ZWuTtMMZaxOttZM21ewAOH0wP_6mBjBy93xtWsYYS2PRIklGOYVmkY=w1280" alt="Composite"/></div><div class="svc-card-body"><div class="svc-card-title">Composite Fabrication</div><div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">Hand Layup, Vacuum Bagging, Autoclave Cure</span></div><div class="svc-row"><span class="svc-key">Secondary</span><span class="svc-val">CNC Trimming, Surface Coating</span></div><div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">Carbon Fiber, Fiberglass, Hybrid Composites</span></div><span class="svc-moq">MOQ: 1 to 2,000 Parts</span></div></div>
+        <div class="svc-card sa sa-up sd3"><div class="svc-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSpxVJC_fIc09SUJo-Xey_HOjiGLdZIM2huCF2xXhLRwjmfXyad_A3Ty9gc_rkhnLE8Nc_EZFACVGyGfiS5gVCO10WbhyqckcxgJshVnDwQoGYMqy1b2YMXuV_hxk9GgHg0ow-UozE22bii5I3BwkFRUrG5aCHVG1wEPbWifPHuYi6WwIW1sseC1GknoQkeuyvJWnWmVEPIkUqYPD_I83kpGSlwa2hIUheBC1g=w1280" alt="Sheet Metal"/></div><div class="svc-card-body"><div class="svc-card-title">Sheet Metal Fabrication</div><div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">Laser Cutting, Bending, Punching, Welding</span></div><div class="svc-row"><span class="svc-key">Secondary</span><span class="svc-val">Powder Coating, Plating, Anodizing</span></div><div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">Aluminum, Mild Steel, Stainless Steel, Brass</span></div><span class="svc-moq">MOQ: 1 to 5,000+ Parts</span></div></div>
       </div>
-
-      <!-- GROUP 2 -->
-      <div class="cap-group-title reveal" style="margin-top:2rem;">Molding, Additive Manufacturing &amp; Rapid Builds</div>
-      <div class="service-cards">
-        <!-- 3D Printing -->
-        <div class="svc-card reveal">
-          <div class="svc-img">
-            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRnIuu78hGH3z6mh88cDLFi6r71ZydYn9v3Vw6pLl5lObdFnItf7DEiFO0AOc6gt76geGtBWy4IwFhZr4vGYs9L3urUjueEyGS45sKGtV80JdF5ltf-s8QoGwlhwz6GRkPis1mXDGxC3Mdo9Dl17u_zk0uLZxo4W7ZzN3x_rRMdlsvdLqFFU8RRoNNyZMQhHUbdU7iJ2e-gObrRYg4WReliYawmNfEaG08AuF8=w1280" alt="3D Printing"/>
-          </div>
-          <div class="svc-body">
-            <div class="svc-title">3D Printing</div>
-            <div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">FDM, SLA, SLS, MJF, DMLS</span></div>
-            <div class="svc-row"><span class="svc-key">Finishing</span><span class="svc-val">Sanding, Vapor Smoothing, Dyeing, Coating</span></div>
-            <div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">Nylon, ABS, Resin, TPU, Aluminum (DMLS)</span></div>
-            <span class="svc-moq">MOQ: 1 to 2,000 Parts</span>
-          </div>
-        </div>
-        <!-- Vacuum Casting -->
-        <div class="svc-card reveal">
-          <div class="svc-img">
-            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQVneY0yMzXMr7waYGGk0QAxwseiSpiaJbLQqMRaYdv6sf2lAnFX1l-BbPzJk0Y6Z7MTiApzXz9cTAYuNmnaU-0ChHLeErLH8c_MrFqrUUq8JmbBvuPdVgx_QR9Jc8Ysyfn_ilvXTm2bvlI0v_58TxsIxutplkbHE2dStcrKSj8vuD014FlVesvRmzlTY1fy6FNGdEU2Gfj6sQrmj4XM6C6vLsQnNYEODyTAiE=w1280" alt="Vacuum Casting"/>
-          </div>
-          <div class="svc-body">
-            <div class="svc-title">Vacuum Casting</div>
-            <div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">Silicone Mold Casting, PU/Urethane Casting</span></div>
-            <div class="svc-row"><span class="svc-key">Finishing</span><span class="svc-val">Painting, Texture, Soft-Touch Coating</span></div>
-            <div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">PU, ABS-like, Rubber-like, High-Temp Resins</span></div>
-            <span class="svc-moq">MOQ: 1 to 500 Parts</span>
-          </div>
-        </div>
-        <!-- Injection Molding -->
-        <div class="svc-card reveal">
-          <div class="svc-img">
-            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STIyfiyVGqVZlCQ6KzIXVhQL9_SsqcW_UiIGNvmevzaqXM6ixPRVxcoTZcwffSiBGpgH8VLuEYYN9cI1x1Sj8uQ1XxUUoskLtYHoLQQz7V1bjQzJmm4OPgBSZdYRfkPeNEA_cJ7cU-Ni7zcIqS73_r8lXVATnc4_VqiJiHlR_Y4Q5tpPJFCfsuAiTH07cGwSvV2ndPmb4F6UJ7Qzfow-dehxueId9i5anq1=w1280" alt="Injection Molding"/>
-          </div>
-          <div class="svc-body">
-            <div class="svc-title">Injection Molding</div>
-            <div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">Single-Shot, Multi-Shot, Overmolding</span></div>
-            <div class="svc-row"><span class="svc-key">Finishing</span><span class="svc-val">Texturing, Painting, Pad Printing, Ultrasonic Welding</span></div>
-            <div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">ABS, PP, PC, Nylon, PEEK, TPU</span></div>
-            <span class="svc-moq">MOQ: 500 to 100,000+ Parts</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- GROUP 3: Prototyping + Production -->
-      <div class="cap-group-title reveal" style="margin-top:2rem;">Rapid Prototyping &amp; Production Scale</div>
-      <div class="svc-full reveal">
-        <div class="svc-full-img">
-          <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQbFrhdDblVQ-Xo7TeBe3CL2vDIrzdJ85YHFX6huaylUBQbuIiNVmCLpiGFMaE93aXn_NFj2I83UaAcrR48bnVf9QVFlMQMqd4P-rln1oWWMFv7Lzq7rK6azSVPMwJGjHKSyTsxrHamcSThPYOIaP4bxtLd1goE0Ka3ZTPrVYvkyhP0YWw9CxVltcFPxJHM8Jj-xr6w2Gct78JLPX5Gv1hg1aWD3M5k1xVU=w1280" alt="Prototyping"/>
-        </div>
-        <div class="svc-full-body">
-          <div class="svc-full-title">Prototyping</div>
-          <div class="svc-full-desc">We deliver rapid prototyping with tight tolerances, diverse materials, and fast turnarounds through our vetted Indian manufacturing network. Send us your CAD for a favourable quote and DFM.</div>
-        </div>
-      </div>
-      <div class="svc-full reveal">
-        <div class="svc-full-img">
-          <img src="https://i.imgur.com/your-second-image.jpg" alt="Production"/>
-        </div>
-        <div class="svc-full-body">
-          <div class="svc-full-title">Production</div>
-          <div class="svc-full-desc">Scale seamlessly from prototypes to high-volume manufacturing with our vetted supply chain, full traceability, and strategic sourcing for cost optimisation.</div>
-        </div>
-      </div>
-
     </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="cap-cta">
-    <div class="section-label" style="justify-content:center;">Ready to Build?</div>
-    <h2 class="section-title" style="text-align:center;">We Serve</h2>
-    <div class="tags" style="justify-content:center;margin-bottom:2.5rem;">
-      <span class="tag">Startups</span><span class="tag">MSMEs / SMBs</span><span class="tag">Corporates</span><span class="tag">Research Projects</span>
+  </div>
+  <div class="cap-section">
+    <div class="cap-section-inner">
+      <div class="grp-eyebrow sa sa-up">Molding, Additive Manufacturing &amp; Rapid Builds</div>
+      <div class="svc-grid">
+        <div class="svc-card sa sa-up sd1"><div class="svc-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0STC_nYWeBlLWlr7VSeAnpI3FU7GV58gbduTH-3Nx2kvFzMOwvcqYTRh0IRvqpKQNQCS99LdOLT71elBYsQz_p7M9M0vgU6nFP1y5WsNfyi7lG77m0ljtuiGwDras5mMPSBTrG2lp6xXx755AbGohL34hdz0-_wPGNnoe1uKl7LH3POCfWFV4LML3mWVIeeX0G_mOPLBa1rFxIpE3KomoYbNOq_JMY4wYAvX_7I=w1280" alt="3D Printing"/></div><div class="svc-card-body"><div class="svc-card-title">3D Printing</div><div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">FDM, SLA, SLS, MJF, DMLS</span></div><div class="svc-row"><span class="svc-key">Secondary</span><span class="svc-val">Sanding, Vapor Smoothing, Dyeing, Coating</span></div><div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">Nylon, ABS, Resin, TPU, Aluminum (DMLS)</span></div><span class="svc-moq">MOQ: 1 to 2,000 Parts</span></div></div>
+        <div class="svc-card sa sa-up sd2"><div class="svc-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQ9HyS2oK6X915ae2A3H1r_-sbP0sO-Q7cPAxCuAuFjZGME7i5DrZYSquvEoRpNHUiC0lj-gE1Hxi33id2e0uC9J5r-2cF5wZIZq6-LfHPF6AnGFEhzFLIqjsRB3SXNLPHZbLiyqd_A071nlBcW2TnuDU0OUOJJ6_RP1LMneoxrETm92kO9oWHXgaYTd68W0pfeVl-k71M9tgtq9GzLDWyypYZLd1aFip5VwvA=w1280" alt="Vacuum Casting"/></div><div class="svc-card-body"><div class="svc-card-title">Vacuum Casting</div><div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">Silicone Mold Casting, PU/Urethane Casting</span></div><div class="svc-row"><span class="svc-key">Secondary</span><span class="svc-val">Painting, Texture, Soft-Touch Coating</span></div><div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">PU, ABS-like, Rubber-like, High-Temp Resins</span></div><span class="svc-moq">MOQ: 1 to 500 Parts</span></div></div>
+        <div class="svc-card sa sa-up sd3"><div class="svc-card-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0STYeZm1QNPBgP5CxAGUb1BQuvs63rKM8N20edTqQZEwaKS6Z9iwTGCkIMaD5cW1R3UI5C5_7is35tOQpErsYgc6me0Odf3jNtnvA01NzzEF9MAPUyMC92-MU7ou-LteFOC-422qmsvx3zaHWfs75zx-X5ZWjXyLnqMD-RQdEDbp5stLm2Ld1burBLQ_VDEwDgDBWAeN1uZuq1AtTnk-0oFEwkTHjGAUM_QT=w1280" alt="Injection Molding"/></div><div class="svc-card-body"><div class="svc-card-title">Injection Molding</div><div class="svc-row"><span class="svc-key">Primary</span><span class="svc-val">Single-Shot, Multi-Shot, Overmolding</span></div><div class="svc-row"><span class="svc-key">Secondary</span><span class="svc-val">Texturing, Painting, Pad Printing, Ultrasonic Welding</span></div><div class="svc-row"><span class="svc-key">Materials</span><span class="svc-val">ABS, PP, PC, Nylon, PEEK, TPU</span></div><span class="svc-moq">MOQ: 500 to 100,000+ Parts</span></div></div>
+      </div>
     </div>
-    <div style="text-align:center;">
-      <a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn-primary">Schedule a Meeting With Us</a>
+  </div>
+  <div class="cap-section">
+    <div class="cap-section-inner">
+      <div class="grp-eyebrow sa sa-up">Rapid Prototyping &amp; Production Scale</div>
+      <div class="svc-full sa sa-up sd1"><div class="svc-full-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0STgH8xtS4myRn_moGd48znYLgYXBu56wrP-2F5-kb_ZNJC20WB-L8OCx2YO1nB2KlPPPpLQFIYNyI1XjI1NzC7uHM-YjPS-Q_x10nTZzTh-JDIpQ4zv-_2F2d9uoTkFqG9MjPqCD35bcF8DwZuJEu-gBZ9ClhQcIs2cTHoioCBmpMn6Z3J8NozubWE7lP_lAyp4UQ2ce-AS2jr3L7Wu53UEN51q9SXpObCn=w1280" alt="Prototyping"/></div><div class="svc-full-body"><div class="svc-full-title">Prototyping</div><div class="svc-full-desc">Rapid prototyping with tight tolerances, diverse materials, and fast turnarounds through our vetted Indian manufacturing network. Send us your CAD for a favourable quote and DFM.</div><a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn btn-amber btn-arrow">Get a Quote</a></div></div>
+      <div class="svc-full sa sa-up sd2" style="direction:rtl"><div class="svc-full-img" style="direction:ltr"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SS2aHWhrVFGispg4kOzS1vNx2VXzExsuHlFsblOE1BRPTIUpIb2WCuHWNkSofZGNJFLZ2VuOSj5tnNX6UyM4tqcmeNRd-9nJShM_KjnmN6S9t8zTVfZykZXYRlHaglV_4Xw8bhSrpvu2J0yqpg3TdvRPBRoKqHi_YJn-5vDDCdijMfabmYaEot6vFqV9ZgB-jRjimvXt2h3lGSBoyN_DYMqemJwZkZJq4W-=w1280" alt="Production"/></div><div class="svc-full-body" style="direction:ltr;border-left:none;border-right:1px solid var(--b1)"><div class="svc-full-title">Production</div><div class="svc-full-desc">Scale from prototype to high-volume manufacturing with our vetted supply chain, full traceability, and strategic sourcing for cost optimisation.</div><a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn btn-dark btn-arrow">Talk to us</a></div></div>
     </div>
-  </section>
+  </div>
+</div>
 
-</div><!-- /page-capabilities -->
+<!-- FULL-WIDTH IMAGE BANNER before We Serve -->
+<div style="position:relative;width:100%;overflow:hidden;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);">
+  <img
+    src="https://lh3.googleusercontent.com/sitesv/APaQ0SRcn5ik8YP7bVzjkqEZn1LWH_DPu9m55YM3-IBEMedmI1rIOHe2q3p1Dd0-5ZeIfZ73oOl6t3xHJ_ed055KXSxvLHruFZSWOn7_8rNHuyjrdkUeMGiquMOBQHMXpyiKN8K9AZ7pEuIjgbfkDuioMUqXPIsjgPwznvfJPrXj16CJFrxssvlcWmICYw69c2_0E2h-vSHWoyszE4knLayEK7Jqr4XI-4GqMQ=w1280"
+    alt="Precision Manufacturing"
+    style="width:100%;height:auto;min-height:520px;object-fit:contain;object-position:center center;filter:brightness(.7) saturate(.75);display:block;background:var(--bg);"
+    onerror="this.style.minHeight='520px';"
+  />
+  <!-- Lighter dark overlay so image is clearly visible -->
+  <div style="position:absolute;inset:0;background:rgba(6,8,10,.38);"></div>
+  <!-- Amber top accent line -->
+  <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--amber),var(--amber-h),transparent);"></div>
+  <!-- Amber bottom accent line -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amber),transparent);"></div>
+  <!-- Content -->
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2.5rem;z-index:2;">
+    <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem;">From India · To The World</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,7rem);letter-spacing:.04em;line-height:.95;color:#ffffff;margin-bottom:.8rem;text-shadow:0 4px 40px rgba(0,0,0,.9);">Execution at Every Scale</h2>
+    <!-- Sector list in green -->
+    <p style="font-family:var(--fb);font-size:clamp(1rem,2vw,1.35rem);font-weight:400;color:var(--green);margin-bottom:.9rem;letter-spacing:.01em;text-shadow:0 2px 20px rgba(0,0,0,.8);">Robotics | Medical | Defence | Aeronautical | Aerospace | Automobile</p>
+    <p style="font-size:.95rem;color:rgba(255,255,255,.85);line-height:1.75;max-width:560px;margin-bottom:2.2rem;text-shadow:0 2px 16px rgba(0,0,0,.7);">From a single prototype to 100,000+ production parts — delivered with full accountability, DFM precision, and zero compromise on quality.</p>
+    <a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn btn-amber btn-arrow">Get a Quote</a>
+  </div>
+</div>
+
+<div class="cap-cta-section">
+  <div class="sec-eyebrow" style="justify-content:center;display:flex;margin-bottom:1rem;position:relative;z-index:1">Ready to Build?</div>
+  <h2 class="sec-h2" style="text-align:center;position:relative;z-index:1;margin-bottom:.5rem">We Serve</h2>
+  <div class="cap-tags" style="justify-content:center;margin-bottom:2.5rem;position:relative;z-index:1"><span class="cap-tag">Startups</span><span class="cap-tag">MSMEs / SMBs</span><span class="cap-tag">Corporates</span><span class="cap-tag">Research Projects</span></div>
+  <div style="text-align:center;position:relative;z-index:1"><a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener" class="btn btn-amber btn-arrow">Schedule a Meeting With Us</a></div>
+</div>
+</div>
 
 
-<!-- ════════════════════════════════════════
-     SUSTAINABILITY PAGE
-════════════════════════════════════════ -->
+<!-- ╔══════════════════════╗
+     ║ SUSTAINABILITY PAGE  ║
+     ╚══════════════════════╝ -->
 <div id="page-sustainability" class="page">
-
-  <!-- HERO -->
-  <section id="sust-hero">
-    <div class="sust-hero-img">
-      <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STGkJSy479eFD9Y73Ys5Apb0WNmLjoJVke9gPt4blamNPxwzRFrh6uCb0m7_p9bDxEe4ld4V80p25C4r0muzB3zlnxVvDMZsSoUIufGnAfqE2afc0TM4bbDZMgqf989cUmKFhtS9HQdgXgo1SePiB7HfPj6CFKQTBOdobRXmaSJL4SYQfZyVEG43r5DgfY3AbJy-KYKikmLZwtwSVMDizPGcySlv8qFFbfOk28=w1280" alt="Sustainability"/>
+<section id="sust-hero">
+  <!-- Globe as full background -->
+  <img class="sust-bg-img" src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1600&q=85&fit=crop&crop=center" alt="Globe earth sustainability"/>
+  <div class="sust-hero-inner">
+    <div>
+      <div class="sust-eyebrow anim-in">Sustainability at Enginuity</div>
+      <h1 class="sust-h1 anim-in">Responsible<br/><em>Manufacturing</em></h1>
+      <p class="body-lg anim-in" style="margin-bottom:2rem;max-width:560px">Every design, every material, every decision is guided by our commitment to a smarter, cleaner, and more responsible future.</p>
+      <a href="#" onclick="showPage('home');return false;" class="btn btn-dark btn-arrow anim-in">Learn About Our Process</a>
     </div>
-    <div class="sust-hero-content">
-      <div class="sust-hero-label">Sustainability at Enginuity</div>
-      <h1 class="sust-hero-h1">Responsible<br/><span>Manufacturing</span></h1>
-      <p class="sust-hero-sub">Every design, every material, every decision is guided by our commitment to a smarter, cleaner, and more responsible future.</p>
+  </div>
+</section>
+<div class="sust-section">
+  <div class="sust-inner">
+    <div class="sust-2col">
+      <div><div class="sust-eyebrow sa sa-left">Our Stance</div><div class="sust-war-quote sa sa-left sd1">We Are At <em>War</em></div><p class="body-lg sa sa-left sd2" style="margin-bottom:1rem">We are at war with mindless manufacturing processes, reckless waste, and the slow death of our planet.</p><p class="body-sm sa sa-left sd3">At Enginuity, every design, every material, every decision is a weapon in our battle for a smarter, cleaner future.</p></div>
+      <div class="sust-img-box sa sa-right"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0STBT0QW6IVOMIRkHajT5YAvBd6Xq_lwOtbPo6kAiV2AB8xR6WRXWk7o6lgVvi7gIj2NM8SB5ONMHhY75--oqtPSjpFh1v6hlC_K3Jd0rEkWFTkfnvJhOsOcdbbOwepH1vjb-jfN5A2U2ApZMN809tpC8JV9h8Atmfgqx6gcrOeW6VX6D1DlQArfZZKwdodaPLVdb7lH220NiblGpNp_ncS9eABTulwX211mr3Y=w1280" alt="War on Waste"/></div>
     </div>
-  </section>
-
-  <!-- WE ARE AT WAR -->
-  <section id="sust-war">
-    <div class="container">
-      <div class="sust-2col">
-        <div>
-          <div class="sust-eyebrow reveal">Our Stance</div>
-          <h2 class="sust-h2 reveal">We Are At <em>War</em></h2>
-          <p class="body-text reveal" style="margin-bottom:1.5rem;">We are at war with mindless manufacturing processes, reckless waste, and the slow death of our planet. We fight the outdated systems that profit from pollution and inefficiency.</p>
-          <p class="body-text reveal">At Enginuity, every design, every material, every decision is a weapon in our battle for a smarter, cleaner, and more responsible future. This isn't business as usual — it's war for what matters.</p>
-        </div>
-        <div class="sust-img-box reveal">
-          <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSf-x3hPrFISwgD_4uw8ZXNfrWjqPhk1dPkb9cB7LFfynspVEOOyMJP_EI8DrZe2Hc6G8AJbpS9M5v88lZFEPyP8hZPOM3w5MpQoZR1Js1PXe42nrzExOX4mZHqOEgVuDDC9KtTeVvGsztkEdG1MwCELGkq92cVeBNWqNtxDYrUIFS6-manr-Y8NIk=w1280" alt="War on waste"/>
-        </div>
+  </div>
+</div>
+<div class="sust-section">
+  <div class="sust-inner">
+    <div class="sec-eyebrow sa sa-up">Core Principles</div><h2 class="sec-h2 sa sa-up sd1">What Drives Us</h2>
+    <div class="pillar-grid">
+      <div class="pillar sa sa-left sd1"><div class="pillar-ico">M</div><div class="pillar-title">Our Mission</div><div class="pillar-text" style="margin-bottom:1.4rem">At Enginuity, we deliver high-quality manufacturing and prototyping solutions with sustainability at the core. We combine innovation with climate-conscious practices to help our clients succeed while reducing environmental impact.</div><div class="pillar-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0STNbYB8W8DpYTHjHhsa1EbI6_y-xoTJm3UVuH9bsf2jUGL1GC2-cwXuCoeYPgK97bL30b7OkI7NnPpCax6JMFpYi72KZ-3_0q37RfrSPLVLgi1Q6iyEcvB6jI8C9hDTA_ewNVf-kARBpUeo-umh-LnjpilntXtKD2jTPSaIXqxyy01wnvf-d5zzB9o=w1280" alt="Mission"/></div></div>
+      <div class="pillar sa sa-right sd2"><div class="pillar-ico">V</div><div class="pillar-title">Our Values</div><div class="pillar-text" style="margin-bottom:1.4rem">At Enginuity, we uphold integrity, innovation, quality, and collaboration — guided by our commitment to sustainable manufacturing. We treat our clients, team, and planet with respect, honesty, and responsibility.</div><div class="pillar-img"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQMhnJS14zNBO3Q-_EEspmU-Y3kQGx9wRio3Zc148TRnw6qFhvRCep7XT0puAhfV_pK1kpK5nZneoxd5tM-0fe2287XEt6W7Do_-CW5qba7zEsd6WREyEX0DUyFtUjA8-UfOlRZuYKSs0H5lDbaxsuzSvW8gG5BbuDuoPXLneJB-fsmSKAYwHOn=w1280" alt="Values"/></div></div>
+      <div class="pillar sa sa-up sd3" style="grid-column:1/-1"><div class="pillar-ico">E</div><div class="pillar-title">Our Expertise</div><div class="pillar-text" style="margin-bottom:1.4rem">With deep industry experience, Enginuity delivers advanced, sustainable manufacturing solutions. We continuously invest in green technologies and training to stay ahead — driving innovation with climate-conscious precision.</div><div class="pillar-img" style="aspect-ratio:21/6"><img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSmW8AVJ2iTe-0nW50iox1jd2tc6AZzzrpMJhCXD8zAvHYMJTOW86brcf3s7XEP7POXt0Pwgr7AypwBofNE3CWml3tygVDMO4-A4l_SiyG-QLKlIK_udHsaiiNOoNKox8jEOXDE_0P2qVYdSvnez0XbVmJ0-fMAi-ZaQuATl_OMPwqldYbmcwcUUIM=w1280" alt="Expertise"/></div></div>
+    </div>
+  </div>
+</div>
+<div class="sust-section" style="position:relative;overflow:hidden;">
+  <!-- Factory background image -->
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80&fit=crop" alt="Smart factory" style="width:100%;height:100%;object-fit:cover;filter:saturate(.25) brightness(.18);"/>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,14,17,.95) 0%,rgba(11,14,17,.8) 60%,rgba(11,14,17,.95) 100%);"></div>
+  </div>
+  <div class="sust-inner" style="position:relative;z-index:1;">
+    <div class="sec-eyebrow sa sa-up" style="color:var(--green)">Network Impact</div>
+    <h2 class="sec-h2 sa sa-up sd1">Enabling Our Network Factories<br/>Become Climate-Smart</h2>
+    <p class="body-lg sa sa-up sd2" style="max-width:640px;margin-bottom:1.5rem">Transforming manufacturing facilities into energy-efficient, low-carbon, and globally compliant operations — building a greener future for industry, one factory at a time.</p>
+    <!-- Image row -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border:1px solid var(--b1);margin-bottom:2rem;" class="sa sa-up sd3">
+      <div style="overflow:hidden;aspect-ratio:4/3;position:relative;">
+        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=80&fit=crop" alt="Solar energy factory" style="width:100%;height:100%;object-fit:cover;filter:saturate(.55) brightness(.7);transition:transform .6s;"/>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:.8rem 1rem;background:linear-gradient(to top,rgba(6,8,10,.9),transparent);font-family:var(--fm);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);">Energy Efficiency</div>
+      </div>
+      <div style="overflow:hidden;aspect-ratio:4/3;position:relative;">
+        <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80&fit=crop" alt="Low carbon manufacturing" style="width:100%;height:100%;object-fit:cover;filter:saturate(.55) brightness(.7);transition:transform .6s;"/>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:.8rem 1rem;background:linear-gradient(to top,rgba(6,8,10,.9),transparent);font-family:var(--fm);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);">Low Carbon Ops</div>
+      </div>
+      <div style="overflow:hidden;aspect-ratio:4/3;position:relative;">
+        <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&q=80&fit=crop" alt="Waste management" style="width:100%;height:100%;object-fit:cover;filter:saturate(.55) brightness(.7);transition:transform .6s;"/>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:.8rem 1rem;background:linear-gradient(to top,rgba(6,8,10,.9),transparent);font-family:var(--fm);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);">Waste Management</div>
       </div>
     </div>
-  </section>
-
-  <!-- MISSION / VALUES / EXPERTISE -->
-  <section id="sust-pillars" style="background:var(--black);border-top:1px solid var(--border);">
-    <div class="container">
-      <div class="section-label">Core Principles</div>
-      <h2 class="section-title reveal">What Drives Us</h2>
-      <div class="pillar-grid">
-        <div class="pillar-card reveal">
-          <div class="pillar-icon">M</div>
-          <div class="pillar-title">Our Mission</div>
-          <div class="pillar-text">At Enginuity, we deliver high-quality manufacturing and prototyping solutions with sustainability at the core. We combine innovation with climate-conscious practices to help our clients succeed while reducing environmental impact.</div>
-        </div>
-        <div class="pillar-card reveal">
-          <div class="pillar-icon">V</div>
-          <div class="pillar-title">Our Values</div>
-          <div class="pillar-text">At Enginuity, we uphold integrity, innovation, quality, and collaboration — guided by our commitment to sustainable manufacturing. We treat our clients, team, and planet with respect, honesty, and responsibility.</div>
-        </div>
-        <div class="pillar-card reveal" style="grid-column:1/-1;">
-          <div class="pillar-icon">E</div>
-          <div class="pillar-title">Our Expertise</div>
-          <div class="pillar-text">With deep industry experience, Enginuity delivers advanced, sustainable manufacturing solutions. We continuously invest in green technologies and training to stay ahead — driving innovation with climate-conscious precision.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NETWORK / CLIMATE-SMART -->
-  <section id="sust-network">
-    <div class="container">
-      <div class="section-label">Network Impact</div>
-      <h2 class="section-title reveal">Enabling Our Network Factories<br/>Become Climate-Smart</h2>
-      <p class="body-text reveal" style="max-width:680px;margin-bottom:1.5rem;">Transforming manufacturing facilities into energy-efficient, low-carbon, and globally compliant operations — building a greener future for industry, one factory at a time.</p>
-      <div class="network-tags reveal">
-        <span class="n-tag">Energy Efficiency</span>
-        <span class="n-tag">Low Carbon</span>
-        <span class="n-tag">Waste Management</span>
-        <span class="n-tag">Water Treatment</span>
-        <span class="n-tag">SmartTech</span>
-        <span class="n-tag">Compliances</span>
-      </div>
-
-      <!-- image row -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;">
-        <div class="sust-img-box reveal" style="aspect-ratio:16/9;">
-          <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STC-Qgr0Dv9LuLG68YI0MyCY2ExLPOR0du-CS1yqFiZO6JtOa9p7f2fV_qfmNVKG_MiR6zNwfgbJznk7vPqrrZ5mLOQ5AbsNG3GrGOhrgwnISF8Sg6FZjgPuti2V7bRzqETQU0kS8ECs_-EXsVN_v8Tw8hNyH8Ki1XU2dKqPLujLNqIEgA0Pxa-=w1280" alt="Our Values"/>
-        </div>
-        <div class="sust-img-box reveal" style="aspect-ratio:16/9;">
-          <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQeyTRYvs0QapFIp58FE6QMbTCzZmxU3OgZxXud-tco1PFlk-ZhuzSzo8a41ST66qJ4R3FzEraq7EJ4kvb3crm7tOeRHs9Ec32QfgdjUJl3_gFpjUpxD7rgB9QozrgwW9GXaefc9Qk7NIVtpZK0Hnme4fOZ4D6qp3XIiPIYMcqeqwMWeT-ljPZiQJk=w1280" alt="Our Expertise"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div><!-- /page-sustainability -->
+    <div class="net-tags sa sa-up sd4"><span class="n-tag">Energy Efficiency</span><span class="n-tag">Low Carbon</span><span class="n-tag">Waste Management</span><span class="n-tag">Water Treatment</span><span class="n-tag">SmartTech</span><span class="n-tag">Compliances</span></div>
+  </div>
+</div>
+</div>
 
 
-<!-- ════════════════════════════════════════
-     SHARED FOOTER
-════════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
+  <div class="foot-top">
     <div>
       <img class="foot-logo" src="https://lh3.googleusercontent.com/sitesv/APaQ0SROmeuQbJ_AjbYGkgy1PlJYoZ6oE14soBsEEEGdkPG9fwYmovOL2aonei9GNYNvUshkQbHNh8I3mnu8xA6ocK7SC88RKH8yEng3lAPp0080kOu_SojKxUX7t4NfQcxLt3UJ1kgikNgQvnRJCU5bMYNjBrXmewUkhxcIrZeJwqLZkR5qzeejFiRjPT4=w16383" alt="Enginuity"/>
-      <p class="foot-tag">Precision Prototyping &amp; Manufacturing — From India to the World.</p>
-      <div class="socials">
-        <a href="https://www.youtube.com/@Enginuity-universal" target="_blank" rel="noopener" class="soc" aria-label="YouTube channel – Enginuity">YT</a>
-        <a href="https://www.instagram.com/enginuityuniversal" target="_blank" rel="noopener" class="soc" aria-label="Instagram – Enginuity">IG</a>
-        <a href="https://www.linkedin.com/company/enginuity-universal/" target="_blank" rel="noopener" class="soc" aria-label="LinkedIn – Enginuity">LI</a>
-        <a href="https://wa.me/918817751713?text=Hi%20Enginuity%20team%2C%20I%E2%80%99d%20like%20to%20discuss%20a%20manufacturing%20requirement.%20Here%20are%20my%20details%E2%80%A6" target="_blank" rel="noopener" class="soc" aria-label="WhatsApp chat link">WA</a>
+      <p class="foot-tagline">Precision Prototyping &amp; Manufacturing — From India to the World.</p>
+      <div class="foot-socials">
+        <a href="https://www.youtube.com/@Enginuity-universal" target="_blank" rel="noopener" class="foot-soc">YT</a>
+        <a href="https://www.instagram.com/enginuityuniversal" target="_blank" rel="noopener" class="foot-soc">IG</a>
+        <a href="https://www.linkedin.com/company/enginuity-universal/" target="_blank" rel="noopener" class="foot-soc">LI</a>
+        <a href="https://wa.me/918817751713?text=Hi%20Enginuity%20team" target="_blank" rel="noopener" class="foot-soc">WA</a>
       </div>
     </div>
-    <div class="foot-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="mailto:info@enginuity.in">info@enginuity.in</a></li>
-        <li><a href="tel:+918817751713">+91-8817751713 (IN)</a></li>
-        <li><a href="tel:+17654099408">+1 (765) 409-9408 (USA)</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h4>India</h4>
-      <ul><li><span>New Delhi</span></li><li><span>Chennai</span></li></ul>
-    </div>
-    <div class="foot-col">
-      <h4>USA</h4>
-      <ul><li><span>Virginia</span></li><li><span>California</span></li></ul>
-    </div>
+    <div class="foot-col"><h4>Services</h4><ul><li><a href="#" onclick="showPage('capabilities');return false;">CNC Machining</a></li><li><a href="#" onclick="showPage('capabilities');return false;">3D Printing</a></li><li><a href="#" onclick="showPage('capabilities');return false;">Injection Molding</a></li><li><a href="#" onclick="showPage('capabilities');return false;">Vacuum Casting</a></li><li><a href="#" onclick="showPage('capabilities');return false;">Composite Fabrication</a></li><li><a href="#" onclick="showPage('capabilities');return false;">Sheet Metal Fabrication</a></li></ul></div>
+    <div class="foot-col"><h4>Company</h4><ul><li><a href="#" onclick="showPage('home');return false;">Home</a></li><li><a href="#" onclick="showPage('capabilities');return false;">Capabilities</a></li><li><a href="#" onclick="showPage('sustainability');return false;">Sustainability</a></li><li><a href="https://calendar.app.google/Ci3yD7otXCm64R7Q8" target="_blank" rel="noopener">Schedule Meeting</a></li></ul></div>
+    <div class="foot-col"><h4>Contact</h4><ul><li><a href="/cdn-cgi/l/email-protection#bed7d0d8d1fedbd0d9d7d0cbd7cac790d7d0"><span class="__cf_email__" data-cfemail="93fafdf5fcd3f6fdf4fafde6fae7eabdfafd">[email&#160;protected]</span></a></li><li><a href="tel:+918817751713">+91-8817751713 (IN)</a></li><li><a href="tel:+17654099408">+1 (765) 409-9408 (USA)</a></li><li><span style="font-size:.8rem;color:var(--t-dim)">New Delhi &amp; Chennai, India</span></li><li><span style="font-size:.8rem;color:var(--t-dim)">Virginia &amp; California, USA</span></li></ul></div>
   </div>
   <div class="foot-bottom">
     <span>Copyright &copy; 2026 Enginuity — All Rights Reserved.</span>
-    <span>Precision. Delivered.</span>
+    <div class="foot-contact"><a href="/cdn-cgi/l/email-protection#3950575f56795c575e50574c504d40175057"><span class="__cf_email__" data-cfemail="a0c9cec6cfe0c5cec7c9ced5c9d4d98ec9ce">[email&#160;protected]</span></a><a href="tel:+918817751713">+91-8817751713</a><a href="tel:+17654099408">+1 (765) 409-9408</a></div>
   </div>
 </footer>
 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-/* ─── PAGE ROUTING ─── */
+/* ═══════════════════════════════════════════════════
+   INTRO SEQUENCE CONTROLLER — Netflix style
+═══════════════════════════════════════════════════ */
+(function() {
+  // Play synthetic "tudum" boom via Web Audio API
+  function playTudum() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      // Deep boom
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(55, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(28, ctx.currentTime + 0.35);
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.85, ctx.currentTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.9);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.9);
+      // High crack layer
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(220, ctx.currentTime);
+      osc2.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.25);
+      gain2.gain.setValueAtTime(0, ctx.currentTime);
+      gain2.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.02);
+      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+      osc2.connect(gain2); gain2.connect(ctx.destination);
+      osc2.start(ctx.currentTime); osc2.stop(ctx.currentTime + 0.4);
+    } catch(e) {}
+  }
+
+  // Fire tudum at the moment the logo stamps in (0.3s delay matches CSS)
+  setTimeout(playTudum, 300);
+
+  // After 2.2s total: fade intro overlay, show fullscreen video
+  setTimeout(() => {
+    const overlay = document.getElementById('intro-overlay');
+    overlay.classList.add('fade-out');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      const vs = document.getElementById('video-screen');
+      vs.classList.add('visible');
+      startSkipCountdown();
+    }, 600);
+  }, 2200);
+})();
+
+/* ═══════════════════════════════════════════════════
+   VIDEO SCREEN CONTROLS
+   Video must finish before auto-advancing.
+   Skip button always works.
+═══════════════════════════════════════════════════ */
+let _muted = false;
+let _videoEnded = false;
+
+// Listen for video end message from iframe
+window.addEventListener('message', function(e) {
+  try {
+    const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+    // Pictory/YouTube ended events
+    if (data && (data.event === 'ended' || data.info === 0 || data.type === 'ended')) {
+      _videoEnded = true;
+      skipVideo();
+    }
+  } catch(err) {}
+});
+
+function toggleMute() {
+  _muted = !_muted;
+  const btn = document.getElementById('muteBtnLabel');
+  const x = document.getElementById('muteX');
+  const waves = document.getElementById('soundWaves');
+  if (_muted) {
+    btn.textContent = 'Unmute';
+    x.style.display = ''; waves.style.display = 'none';
+  } else {
+    btn.textContent = 'Mute';
+    x.style.display = 'none'; waves.style.display = '';
+  }
+  const iframe = document.getElementById('vsIframe');
+  if (iframe && iframe.contentWindow) {
+    iframe.contentWindow.postMessage(_muted ? '{"event":"command","func":"mute"}' : '{"event":"command","func":"unMute"}', '*');
+  }
+}
+
+function skipVideo() {
+  const vs = document.getElementById('video-screen');
+  vs.classList.add('fade-out');
+  setTimeout(() => {
+    vs.style.display = 'none';
+    revealSite();
+  }, 700);
+}
+
+// Countdown timer on the skip button (counts down from 5 when video screen appears)
+function startSkipCountdown() {
+  let t = 5;
+  const secEl = document.getElementById('seconds');
+  const cdEl = document.getElementById('skipCountdown');
+  const iv = setInterval(() => {
+    t--;
+    if (secEl) secEl.textContent = t;
+    if (t <= 0) {
+      clearInterval(iv);
+      if (cdEl) cdEl.style.display = 'none';
+    }
+  }, 1000);
+}
+
+function revealSite() {
+  document.body.style.overflow = '';
+  triggerEnterAnimations();
+  initSA();
+  initShowcase();
+  initAdvancedScroll();
+  setTimeout(() => {
+    document.getElementById('scroll-progress').classList.add('visible');
+  }, 800);
+}
+
+/* ═══════════════════════════════════════════════════
+   PAGE ROUTING
+═══════════════════════════════════════════════════ */
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
-  document.querySelectorAll('nav a[id^="nav-"]').forEach(a => a.classList.remove('active'));
-  const navEl = document.getElementById('nav-' + name);
-  if (navEl) navEl.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  setTimeout(initReveal, 100);
+  document.querySelectorAll('#main-nav a[id^="nav-"]').forEach(a => a.classList.remove('active'));
+  const el = document.getElementById('nav-' + name);
+  if (el) el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  // Update scroll dots visibility
+  const sp = document.getElementById('scroll-progress');
+  if (name === 'home') {
+    sp.classList.add('visible');
+  } else {
+    sp.classList.remove('visible');
+  }
+  setTimeout(() => { triggerEnterAnimations(); initSA(); initShowcase(); }, 60);
 }
 
-/* ─── SCROLL REVEAL ─── */
-function initReveal() {
-  const reveals = document.querySelectorAll('.page.active .reveal:not(.visible)');
+/* ═══════════════════════════════════════════════════
+   SCROLL ANIMATION ENGINE (basic .sa classes)
+═══════════════════════════════════════════════════ */
+function initSA() {
+  const items = document.querySelectorAll('.page.active .sa:not(.in)');
+  if (!items.length) return;
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(r => obs.observe(r));
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.09, rootMargin: '0px 0px -50px 0px' });
+  items.forEach(el => obs.observe(el));
 }
 
-/* stagger grids */
-['cap-cards','value-grid','aud-grid','service-cards','pillar-grid'].forEach(cls => {
-  document.querySelectorAll(`.${cls} > *`).forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.09}s`;
+/* SHOWCASE SLIDES */
+function initShowcase() {
+  const slides = document.querySelectorAll('.showcase-slide:not(.in)');
+  if (!slides.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -60px 0px' });
+  slides.forEach(el => obs.observe(el));
+}
+
+/* PAGE-ENTER ANIMATIONS */
+function triggerEnterAnimations() {
+  document.querySelectorAll('.page.active .anim-in').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(22px)';
+    el.style.transition = `opacity .8s ${i * 0.11}s cubic-bezier(.22,1,.36,1), transform .8s ${i * 0.11}s cubic-bezier(.22,1,.36,1)`;
+    requestAnimationFrame(() => setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 40));
+  });
+}
+
+/* ═══════════════════════════════════════════════════
+   ADVANCED SCROLL ENGINE
+   - Parallax image layers
+   - Scroll-progress dot navigation
+   - Section glow / wipe reveals
+   - Parallax text drift
+   - Card 3D tilt on hover
+═══════════════════════════════════════════════════ */
+function initAdvancedScroll() {
+  // ── 1. Section wipe & glow observers ──
+  const wipeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        wipeObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.section-wipe, .glow-section').forEach(el => wipeObs.observe(el));
+
+  // ── 2. Scroll-progress dot sync ──
+  const dots = document.querySelectorAll('.sp-dot');
+  const sections = Array.from(dots).map(d => document.getElementById(d.dataset.section)).filter(Boolean);
+
+  const dotObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const id = e.target.id;
+      const dot = document.querySelector(`.sp-dot[data-section="${id}"]`);
+      if (dot) {
+        if (e.isIntersecting) {
+          dots.forEach(d => d.classList.remove('active'));
+          dot.classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => dotObs.observe(s));
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = document.getElementById(dot.dataset.section);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // ── 3. Parallax on images inside .parallax-img ──
+  const parallaxImgs = document.querySelectorAll('.parallax-img img');
+
+  // ── 4. Hero background parallax ──
+  const heroBg = document.getElementById('heroBg');
+
+  // ── 5. Subtle text drift on hero h1 ──
+  const heroH1 = document.querySelector('.hero-h1');
+
+  // ── 6. Prob cards 3D tilt ──
+  document.querySelectorAll('.prob-card, .india-card, .serve-card').forEach(card => {
+    card.classList.add('tilt-card');
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5;
+      const y = (e.clientY - r.top) / r.height - .5;
+      card.style.transform = `perspective(600px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateZ(4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  // ── 7. How-steps stagger on scroll ──
+  const howSteps = document.querySelectorAll('.how-step');
+  const howObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        howSteps.forEach((step, i) => {
+          setTimeout(() => {
+            step.style.opacity = '1';
+            step.style.transform = 'translateY(0) scale(1)';
+          }, i * 90);
+        });
+        howObs.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+  if (howSteps.length) {
+    howSteps.forEach(s => { s.style.opacity = '0'; s.style.transform = 'translateY(28px) scale(.97)'; s.style.transition = 'opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1)'; });
+    howObs.observe(document.querySelector('.how-steps') || howSteps[0]);
+  }
+
+  // ── 8. Stats bar counter animation ──
+  const statNums = document.querySelectorAll('.h-stat-num');
+  const statObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'countUp .6s cubic-bezier(.22,1,.36,1) both';
+        statObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(n => statObs.observe(n));
+
+  // ── 9. prov-cells cascade on scroll ──
+  const provCells = document.querySelectorAll('.prov-cell');
+  const provObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        provCells.forEach((c, i) => {
+          setTimeout(() => c.classList.add('in'), i * 70);
+        });
+        provObs.disconnect();
+      }
+    });
+  }, { threshold: 0.15 });
+  if (document.querySelector('#provides')) provObs.observe(document.querySelector('#provides'));
+
+  // ── 10. Scroll-driven header shrink ──
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function onScroll() {
+    const sy = window.scrollY;
+
+    // Header shrink
+    if (header) {
+      if (sy > 80) {
+        header.style.height = '50px';
+        header.style.boxShadow = '0 2px 24px rgba(0,0,0,.9)';
+      } else {
+        header.style.height = '60px';
+        header.style.boxShadow = '';
+      }
+    }
+
+    // Hero parallax
+    if (heroBg) {
+      const hero = document.getElementById('hero');
+      if (hero) {
+        const r = hero.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) {
+          const progress = -r.top / window.innerHeight;
+          heroBg.style.transform = `translateY(${progress * 60}px)`;
+        }
+      }
+    }
+
+    // Hero h1 drift
+    if (heroH1 && window.scrollY < window.innerHeight) {
+      heroH1.style.transform = `translateY(${window.scrollY * 0.08}px)`;
+    }
+
+    // Parallax images
+    parallaxImgs.forEach(img => {
+      const r = img.closest('.parallax-img').getBoundingClientRect();
+      if (r.bottom > 0 && r.top < window.innerHeight) {
+        const progress = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+        img.style.transform = `scale(1.15) translateY(${(progress - .5) * -40}px)`;
+      }
+    });
+  }
+
+  // initial call
+  onScroll();
+}
+
+/* ═══════════════════════════════════════════════════
+   YOUTUBE LITE FACADE
+   Click thumbnail → inject autoplay iframe
+═══════════════════════════════════════════════════ */
+function loadYT(el) {
+  const vid = el.dataset.vid;
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0&modestbranding=1&color=white&enablejsapi=1`;
+  iframe.title = 'Enginuity Video';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+  // Remove thumbnail content and inject iframe
+  el.innerHTML = '';
+  el.appendChild(iframe);
+  el.style.cursor = 'default';
+}
+
+// Hover effect on YT facades
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.yt-facade').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      const img = el.querySelector('img');
+      const btn = el.querySelector('div > div');
+      if (img) img.style.filter = 'saturate(.9) brightness(.9)';
+      if (btn) { btn.style.transform = 'scale(1.08)'; btn.style.background = 'rgba(255,170,32,.98)'; }
+    });
+    el.addEventListener('mouseleave', () => {
+      const img = el.querySelector('img');
+      const btn = el.querySelector('div > div');
+      if (img) img.style.filter = 'saturate(.7) brightness(.75)';
+      if (btn) { btn.style.transform = 'scale(1)'; btn.style.background = 'rgba(232,144,10,.92)'; }
+    });
   });
 });
+document.body.style.overflow = 'hidden';
 
-/* ─── CAROUSEL DRAG ─── */
-const strip = document.getElementById('carouselStrip');
-if (strip) {
-  let isDown = false, startX, scrollLeft;
-  strip.addEventListener('mousedown', e => { isDown = true; strip.classList.add('grabbing'); startX = e.pageX - strip.offsetLeft; scrollLeft = strip.scrollLeft; });
-  strip.addEventListener('mouseleave', () => { isDown = false; strip.classList.remove('grabbing'); });
-  strip.addEventListener('mouseup', () => { isDown = false; strip.classList.remove('grabbing'); });
-  strip.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); strip.scrollLeft = scrollLeft - (e.pageX - strip.offsetLeft - startX) * 1.5; });
-}
+// Fallback: if video screen somehow never ends/is skipped, auto-reveal after 5 minutes
+// (User must watch video or skip — no auto-advance)
+setTimeout(() => {
+  const vs = document.getElementById('video-screen');
+  if (vs && vs.classList.contains('visible') && !vs.classList.contains('fade-out')) {
+    skipVideo();
+  }
+  const overlay = document.getElementById('intro-overlay');
+  if (overlay && overlay.style.display !== 'none') {
+    overlay.style.display = 'none';
+    revealSite();
+  }
+}, 300000);
 
-/* init on load */
-window.addEventListener('DOMContentLoaded', initReveal);
+// Run initial SA after DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  initSA();
+  initShowcase();
+});
 </script>
 </body>
 </html>
